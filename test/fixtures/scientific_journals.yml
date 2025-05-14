@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  institutional_affiliation: MyString
+  issn: MyString
+  thematic_scope: MyText
+  website_url: MyString
+  periodicity: MyString
+  current_status: MyString
+  foundation_year: 1
+  closure_year: 1
+  qualis: MyString
+
+two:
+  name: MyString
+  institutional_affiliation: MyString
+  issn: MyString
+  thematic_scope: MyText
+  website_url: MyString
+  periodicity: MyString
+  current_status: MyString
+  foundation_year: 1
+  closure_year: 1
+  qualis: MyString

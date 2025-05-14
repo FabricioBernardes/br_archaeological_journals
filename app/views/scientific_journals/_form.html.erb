@@ -1,0 +1,67 @@
+<%= form_with(model: scientific_journal, class: "contents") do |form| %>
+  <% if scientific_journal.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(scientific_journal.errors.count, "error") %> prohibited this scientific_journal from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% scientific_journal.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:name].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:name].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :institutional_affiliation %>
+    <%= form.text_field :institutional_affiliation, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:institutional_affiliation].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:institutional_affiliation].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :issn %>
+    <%= form.text_field :issn, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:issn].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:issn].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :thematic_scope %>
+    <%= form.text_area :thematic_scope, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:thematic_scope].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:thematic_scope].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :website_url %>
+    <%= form.text_field :website_url, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:website_url].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:website_url].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :periodicity %>
+    <%= form.text_field :periodicity, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:periodicity].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:periodicity].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :current_status %>
+    <%= form.text_field :current_status, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:current_status].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:current_status].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :foundation_year %>
+    <%= form.number_field :foundation_year, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:foundation_year].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:foundation_year].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :closure_year %>
+    <%= form.number_field :closure_year, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:closure_year].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:closure_year].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :qualis %>
+    <%= form.text_field :qualis, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:qualis].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:qualis].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

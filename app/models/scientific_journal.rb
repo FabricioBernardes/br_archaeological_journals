@@ -1,0 +1,2 @@
+class ScientificJournal < ApplicationRecord
+end

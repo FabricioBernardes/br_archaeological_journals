@@ -1,15 +1,21 @@
 <% content_for :title, "Showing scientific journal" %>
 
-<div class="md:w-2/3 w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
-  <% end %>
+<div class="container">
+  <div class="max-w-md mx-auto p-6 bg-gray-200 shadow-md rounded-lg">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+    <% end %>
 
-  <h1 class="font-bold text-4xl">Showing scientific journal</h1>
+    <h1 class="text-2xl font-bold mb-6">Showing scientific journal</h1>
 
-  <%= render @scientific_journal %>
+    <div class="mb-6">
+      <%= render @scientific_journal %>
+    </div>
 
-  <%= link_to "Edit this scientific journal", edit_scientific_journal_path(@scientific_journal), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to scientific journals", scientific_journals_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this scientific journal", @scientific_journal, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+    <div class="flex flex-col sm:flex-row gap-2">
+      <%= link_to "Edit this scientific journal", edit_scientific_journal_path(@scientific_journal), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
+      <%= link_to "Back to scientific journals", scientific_journals_path, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
+      <%= button_to "Destroy this scientific journal", @scientific_journal, method: :delete, form_class: "w-full sm:w-auto", class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-700 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+    </div>
+  </div>
 </div>

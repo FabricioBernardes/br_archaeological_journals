@@ -1,0 +1,112 @@
+<%= form_with(model: article, class: "contents") do |form| %>
+  <% if article.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% article.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:title].none?, "border-red-400 focus:outline-red-600": article.errors[:title].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :authors %>
+    <%= form.text_area :authors, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:authors].none?, "border-red-400 focus:outline-red-600": article.errors[:authors].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :abstract %>
+    <%= form.text_area :abstract, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:abstract].none?, "border-red-400 focus:outline-red-600": article.errors[:abstract].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :doi %>
+    <%= form.text_field :doi, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:doi].none?, "border-red-400 focus:outline-red-600": article.errors[:doi].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :article_url %>
+    <%= form.text_field :article_url, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:article_url].none?, "border-red-400 focus:outline-red-600": article.errors[:article_url].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :keywords %>
+    <%= form.text_area :keywords, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:keywords].none?, "border-red-400 focus:outline-red-600": article.errors[:keywords].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :language %>
+    <%= form.text_field :language, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:language].none?, "border-red-400 focus:outline-red-600": article.errors[:language].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :research_theme %>
+    <%= form.text_field :research_theme, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:research_theme].none?, "border-red-400 focus:outline-red-600": article.errors[:research_theme].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :publication_type %>
+    <%= form.text_field :publication_type, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:publication_type].none?, "border-red-400 focus:outline-red-600": article.errors[:publication_type].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :main_methodology %>
+    <%= form.text_field :main_methodology, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:main_methodology].none?, "border-red-400 focus:outline-red-600": article.errors[:main_methodology].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :bibliographic_reference %>
+    <%= form.text_area :bibliographic_reference, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:bibliographic_reference].none?, "border-red-400 focus:outline-red-600": article.errors[:bibliographic_reference].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :institutions %>
+    <%= form.text_area :institutions, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:institutions].none?, "border-red-400 focus:outline-red-600": article.errors[:institutions].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :data_source %>
+    <%= form.text_field :data_source, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:data_source].none?, "border-red-400 focus:outline-red-600": article.errors[:data_source].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :database_citation %>
+    <%= form.text_area :database_citation, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:database_citation].none?, "border-red-400 focus:outline-red-600": article.errors[:database_citation].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :states %>
+    <%= form.text_field :states, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:states].none?, "border-red-400 focus:outline-red-600": article.errors[:states].any?}] %>
+  </div>
+
+  <div class="my-5 flex items-center gap-2">
+    <%= form.label :spatial_analysis %>
+    <%= form.check_box :spatial_analysis, class: ["block shadow-sm rounded-md border order-first h-5 w-5", {"border-gray-400 focus:outline-blue-600": article.errors[:spatial_analysis].none?, "border-red-400 focus:outline-red-600": article.errors[:spatial_analysis].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :laboratory_methods %>
+    <%= form.text_area :laboratory_methods, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:laboratory_methods].none?, "border-red-400 focus:outline-red-600": article.errors[:laboratory_methods].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :datings %>
+    <%= form.text_area :datings, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:datings].none?, "border-red-400 focus:outline-red-600": article.errors[:datings].any?}] %>
+  </div>
+
+  <div class="field my-5">
+    <%= form.label :edition_id %>
+    <%= form.collection_select :edition_id, Edition.all.order('volume'), :id, :volume_with_journal, {prompt: "Selecione a Edição"}, class: "form-control" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

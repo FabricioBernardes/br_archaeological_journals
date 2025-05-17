@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  authors: MyText
+  abstract: MyText
+  doi: MyString
+  article_url: MyString
+  keywords: MyText
+  language: MyString
+  research_theme: MyString
+  publication_type: MyString
+  main_methodology: MyString
+  bibliographic_reference: MyText
+  institutions: MyText
+  data_source: MyString
+  database_citation: MyText
+  states: MyString
+  spatial_analysis: false
+  laboratory_methods: MyText
+  datings: MyText
+  edition: one
+
+two:
+  title: MyString
+  authors: MyText
+  abstract: MyText
+  doi: MyString
+  article_url: MyString
+  keywords: MyText
+  language: MyString
+  research_theme: MyString
+  publication_type: MyString
+  main_methodology: MyString
+  bibliographic_reference: MyText
+  institutions: MyText
+  data_source: MyString
+  database_citation: MyText
+  states: MyString
+  spatial_analysis: false
+  laboratory_methods: MyText
+  datings: MyText
+  edition: two

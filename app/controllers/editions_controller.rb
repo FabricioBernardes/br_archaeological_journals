@@ -8,6 +8,7 @@ class EditionsController < ApplicationController
 
   # GET /editions/1 or /editions/1.json
   def show
+    @articles = @edition.articles
   end
 
   # GET /editions/new

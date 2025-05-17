@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :articles
   resources :editions
   resources :scientific_journals
   devise_for :users

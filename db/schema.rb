@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_14_232435) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_17_161207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "authors"
+    t.text "abstract"
+    t.string "doi"
+    t.string "article_url"
+    t.text "keywords"
+    t.string "language"
+    t.string "research_theme"
+    t.string "publication_type"
+    t.string "main_methodology"
+    t.text "bibliographic_reference"
+    t.text "institutions"
+    t.string "data_source"
+    t.text "database_citation"
+    t.string "states"
+    t.boolean "spatial_analysis"
+    t.text "laboratory_methods"
+    t.text "datings"
+    t.bigint "edition_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["edition_id"], name: "index_articles_on_edition_id"
+  end
 
   create_table "editions", force: :cascade do |t|
     t.string "volume"
@@ -56,5 +81,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_14_232435) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "articles", "editions"
   add_foreign_key "editions", "scientific_journals"
 end

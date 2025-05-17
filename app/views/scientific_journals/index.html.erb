@@ -10,20 +10,30 @@
     <%= link_to "New scientific journal", new_scientific_journal_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <div id="scientific_journals" class="bg-gray-200 shadow-md rounded-lg p-6 min-w-full divide-y divide-gray-200 space-y-5">
+  <div id="scientific_journals" class="p-4 bg-gray-200">
+
     <% if @scientific_journals.any? %>
+
       <% @scientific_journals.each do |scientific_journal| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <%= render scientific_journal %>
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row gap-2">
-            <%= link_to "Show", scientific_journal, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= link_to "Edit", edit_scientific_journal_path(scientific_journal), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= button_to "Destroy", scientific_journal, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
+        <div class="flex justify-between w-full items-center mb-5 pb-4 border-b">
+
+            <div id="<%= dom_id scientific_journal %>" >
+              <div class="flex gap-2">
+                <%= link_to scientific_journal.name, scientific_journal %>
+              </div>
+            </div>
+
+            <div class="flex gap-2">
+              <%= link_to "Edit", edit_scientific_journal_path(scientific_journal), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+              <%= button_to "Destroy", scientific_journal, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+            </div>
+
         </div>
       <% end %>
+
     <% else %>
       <p class="text-center my-10">No scientific journals found.</p>
     <% end %>
+
   </div>
 </div>

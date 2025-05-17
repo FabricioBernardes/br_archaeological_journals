@@ -1,5 +1,5 @@
 class ScientificJournalsController < ApplicationController
-  before_action :set_scientific_journal, only: %i[ show edit update destroy ]
+  before_action :set_scientific_journal, only: %i[show edit update destroy]
 
   # GET /scientific_journals or /scientific_journals.json
   def index
@@ -8,6 +8,9 @@ class ScientificJournalsController < ApplicationController
 
   # GET /scientific_journals/1 or /scientific_journals/1.json
   def show
+    @scientific_journal = ScientificJournal.find(params[:id])
+    @editions = @scientific_journal.editions
+    @scientific_journal.editions.build if @editions.empty?
   end
 
   # GET /scientific_journals/new
@@ -58,13 +61,15 @@ class ScientificJournalsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_scientific_journal
-      @scientific_journal = ScientificJournal.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def scientific_journal_params
-      params.require(:scientific_journal).permit(:name, :institutional_affiliation, :issn, :thematic_scope, :website_url, :periodicity, :current_status, :foundation_year, :closure_year, :qualis)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_scientific_journal
+    @scientific_journal = ScientificJournal.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def scientific_journal_params
+    params.require(:scientific_journal).permit(:name, :institutional_affiliation, :issn, :thematic_scope, :website_url, :periodicity, :current_status, :foundation_year, :closure_year, :qualis,
+                                               :editions)
+  end
 end

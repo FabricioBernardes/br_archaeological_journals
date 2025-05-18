@@ -1,7 +1,7 @@
 <% content_for :title, "Showing scientific journal" %>
 
 <div class="container flex flex-col gap-8 items-center">
-  <div class="max-w-3xl w-max mx-auto p-6 bg-gray-200 shadow-md rounded-lg">
+  <div class="max-w-3xl w-full mx-auto p-6 bg-gray-200">
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
     <% end %>
@@ -12,35 +12,35 @@
       </h1>
       <div class="w-full grid gap-4 grid-cols-3">
         <div>
-          <strong class="block font-medium mb-1">Institutional affiliation:</strong>
+          <strong class="block font-medium mb-1">Vínculo institucional:</strong>
           <%= @scientific_journal.institutional_affiliation %>
         </div>
         <div>
-          <strong class="block font-medium mb-1">Issn:</strong>
+          <strong class="block font-medium mb-1">ISSN:</strong>
           <%= @scientific_journal.issn %>
         </div>
         <div>
-          <strong class="block font-medium mb-1">Thematic scope:</strong>
+          <strong class="block font-medium mb-1">Escopo temático:</strong>
           <%= @scientific_journal.thematic_scope %>
         </div>
         <div>
-          <strong class="block font-medium mb-1">Website url:</strong>
+          <strong class="block font-medium mb-1">URL do site:</strong>
           <%= @scientific_journal.website_url %>
         </div>
         <div>
-          <strong class="block font-medium mb-1">Periodicity:</strong>
+          <strong class="block font-medium mb-1">Periodicidade:</strong>
           <%= @scientific_journal.periodicity %>
         </div>
         <div>
-          <strong class="block font-medium mb-1">Current status:</strong>
+          <strong class="block font-medium mb-1">Status atual (ativo, descontinuado, etc):</strong>
           <%= @scientific_journal.current_status %>
         </div>
         <div>
-          <strong class="block font-medium mb-1">Foundation year:</strong>
+          <strong class="block font-medium mb-1">Ano da fundação:</strong>
           <%= @scientific_journal.foundation_year %>
         </div>
         <div>
-          <strong class="block font-medium mb-1">Closure year:</strong>
+          <strong class="block font-medium mb-1">Ano do encerramento:</strong>
           <%= @scientific_journal.closure_year %>
         </div>
         <div>
@@ -57,17 +57,13 @@
     </div>
   </div>
 
-  <div class="max-w-3xl w-max">
+  <div class="max-w-3xl w-full mx-auto p-6 bg-gray-200">
     <h2 class="text-xl font-bold text-gray-800 mt-8 mb-4">Editions</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div class="flex flex-col gap-4 w-full">
       <% @editions.each do |edition| %>
-        <div class="bg-white shadow-md rounded-lg p-4">
-          <div class="flex flex-col gap-2">
-            <div>
-              <%= edition.volume %>
-            </div>
-          </div>
-        </div>
+        <a class="w-full bg-gray-100 border-b border-gray-300 px-4 py-2" href="<%= edition_path(edition) %>">
+          <%= edition.volume %>
+        </a>
       <% end %>
     </div>
   </div>

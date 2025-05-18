@@ -1,6 +1,6 @@
 <% content_for :title, "Showing edition" %>
 
-<div class="md:w-2/3 w-full">
+<div class="w-full">
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
@@ -13,9 +13,54 @@
     </ul>
   </div>
 
-  <h1 class="font-bold text-4xl">Showing edition</h1>
+  <h1 class="font-bold text-4xl"><%= @edition.volume %></h1>
 
-  <%= render @edition %>
+  <div class="w-full grid grid-cols-3 gap-4 my-5">
+    <div>
+      <strong class="block font-medium mb-1">Publication date:</strong>
+      <%= @edition.publication_date %>
+    </div>
+    <div>
+      <strong class="block font-medium mb-1">Editors:</strong>
+      <%= @edition.editors %>
+    </div>
+    <div>
+      <strong class="block font-medium mb-1">Theme:</strong>
+      <%= @edition.theme %>
+    </div>
+    <div>
+      <strong class="block font-medium mb-1">Edition type:</strong>
+      <%= @edition.edition_type %>
+    </div>
+    <div>
+      <strong class="block font-medium mb-1">Access url:</strong>
+      <%= @edition.url %>
+    </div>
+    <div>
+      <strong class="block font-medium mb-1">Doi:</strong>
+      <%= @edition.doi %>
+    </div>
+    <div>
+      <strong class="block font-medium mb-1">Available format:</strong>
+      <%= @edition.available_format %>
+    </div>
+    <div>
+      <strong class="block font-medium mb-1">Scientific journal:</strong>
+      <%= @edition.scientific_journal_id %>
+    </div>
+  </div>
+
+  <div class="w-full flex flex-col gap-2 mb-6">
+    <% if @articles.any? %>
+      <% @articles.each do |article| %>
+        <%= link_to article.title, article, class: "w-full px-3.5 py-2.5 bg-gray-100 border-b" %>
+      <% end %>
+    <% else %>
+      <p class="text-center my-10">Nenhum artigo encontrado.</p>
+    <% end %>
+  </div>
+
+  <%= link_to "Criar novo artigo", new_article_path(article: { edition_id: @edition.id }), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium inline-block" %>
 
   <%= link_to "Edit this edition", edit_edition_path(@edition), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= link_to "Back to editions", editions_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>

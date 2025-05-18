@@ -101,10 +101,19 @@
     <%= form.text_area :datings, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:datings].none?, "border-red-400 focus:outline-red-600": article.errors[:datings].any?}] %>
   </div>
 
-  <div class="field my-5">
-    <%= form.label :edition_id %>
-    <%= form.collection_select :edition_id, Edition.all.order('volume'), :id, :volume_with_journal, {prompt: "Selecione a Edição"}, class: "form-control" %>
-  </div>
+  <% if edition_id.present? %>
+    <div class="field my-5">
+      <%= form.label :edition_id %>
+      <%= form.hidden_field :edition_id, value: edition_id %>
+      <%= Edition.find(edition_id).volume_with_journal %>
+    </div>
+  <% else %>
+    <div class="field my-5">
+      <%= form.label :edition_id %>
+      <%= form.collection_select :edition_id, Edition.all.order('volume'), :id, :volume_with_journal, {prompt: "Selecione a Edição"}, class: "form-control" %>
+    </div>
+  <% end %>
+
 
   <div class="inline">
     <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>

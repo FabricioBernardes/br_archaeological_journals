@@ -12,52 +12,52 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :name %>
+    <%= form.label "nome" %>
     <%= form.text_field :name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:name].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:name].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :institutional_affiliation %>
+    <%= form.label "Afiliação institucional" %>
     <%= form.text_field :institutional_affiliation, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:institutional_affiliation].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:institutional_affiliation].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :issn %>
+    <%= form.label "ISSN" %>
     <%= form.text_field :issn, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:issn].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:issn].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :thematic_scope %>
+    <%= form.label "Escopo temático" %>
     <%= form.text_area :thematic_scope, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:thematic_scope].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:thematic_scope].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :website_url %>
+    <%= form.label "URL do site" %>
     <%= form.text_field :website_url, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:website_url].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:website_url].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :periodicity %>
+    <%= form.label "Periodicidade" %>
     <%= form.text_field :periodicity, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:periodicity].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:periodicity].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :current_status %>
+    <%= form.label "Status" %>
     <%= form.text_field :current_status, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:current_status].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:current_status].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :foundation_year %>
+    <%= form.label "Ano da fundação" %>
     <%= form.number_field :foundation_year, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:foundation_year].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:foundation_year].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :closure_year %>
+    <%= form.label "Ano do encerramento" %>
     <%= form.number_field :closure_year, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:closure_year].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:closure_year].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :qualis %>
+    <%= form.label "QUALIS" %>
     <%= form.text_field :qualis, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": scientific_journal.errors[:qualis].none?, "border-red-400 focus:outline-red-600": scientific_journal.errors[:qualis].any?}] %>
   </div>
 

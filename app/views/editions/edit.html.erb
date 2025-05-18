@@ -1,7 +1,7 @@
 <% content_for :title, "Editing edition" %>
 
 <div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Editing edition</h1>
+  <h1 class="font-bold text-4xl">Editar dados da edição</h1>
 
   <%= render "form", edition: @edition, scientific_journal_id: params.dig(:edition, :edition_id) %>
 

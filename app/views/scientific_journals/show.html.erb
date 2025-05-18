@@ -7,10 +7,14 @@
     <% end %>
 
     <div class="mb-6">
-      <h1 class="text-2xl font-bold text-gray-800 mb-4">
+      <h1 class="text-2xl font-bold text-gray-800 mb-8">
         <%= @scientific_journal.name %>
       </h1>
-      <div class="w-full grid gap-4 grid-cols-3">
+      <div class="w-full mb-4">
+        <strong class="block font-medium mb-1">Escopo temático:</strong>
+        <%= @scientific_journal.thematic_scope %>
+      </div>
+      <div class="w-full grid gap-8 grid-cols-3">
         <div>
           <strong class="block font-medium mb-1">Vínculo institucional:</strong>
           <%= @scientific_journal.institutional_affiliation %>
@@ -18,10 +22,6 @@
         <div>
           <strong class="block font-medium mb-1">ISSN:</strong>
           <%= @scientific_journal.issn %>
-        </div>
-        <div>
-          <strong class="block font-medium mb-1">Escopo temático:</strong>
-          <%= @scientific_journal.thematic_scope %>
         </div>
         <div>
           <strong class="block font-medium mb-1">URL do site:</strong>
@@ -51,23 +51,25 @@
     </div>
 
     <div class="flex flex-col sm:flex-row gap-2">
-      <%= link_to "Edit this scientific journal", edit_scientific_journal_path(@scientific_journal), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
-      <%= link_to "Back to scientific journals", scientific_journals_path, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
-      <%= button_to "Destroy this scientific journal", @scientific_journal, method: :delete, form_class: "w-full sm:w-auto", class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-700 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+      <%= link_to "Editar", edit_scientific_journal_path(@scientific_journal), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
+      <%= link_to "Voltar para revistas", scientific_journals_path, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
+      <%= button_to "Remover revista", @scientific_journal, method: :delete, form_class: "w-full sm:w-auto", class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-700 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
     </div>
   </div>
 
   <div class="max-w-3xl w-full mx-auto p-6 bg-gray-200">
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold text-gray-800">Editions</h2>
-      <%= link_to "Create new edition", new_edition_path(scientific_journal_id: @scientific_journal.id), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium inline-block" %>
+      <h2 class="text-xl font-bold text-gray-800">Edições</h2>
+      <%= link_to "Criar nova edição", new_edition_path(scientific_journal_id: @scientific_journal.id), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium inline-block" %>
     </div>
 
     <div class="flex flex-col gap-4 w-full">
       <% @editions.each do |edition| %>
-        <a class="w-full bg-gray-100 border-b border-gray-300 px-4 py-2" href="<%= edition_path(edition) %>">
-          <%= edition.volume %>
-        </a>
+        <% if edition.present? && edition.id.present? %>
+          <a class="w-full bg-gray-100 border-b border-gray-300 px-4 py-2" href="<%= edition_path(edition) %>">
+            <%= edition.volume %>
+          </a>
+        <% end %>
       <% end %>
     </div>
   </div>

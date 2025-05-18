@@ -6,8 +6,8 @@
   <% end %>
 
   <div class="flex justify-between items-center mb-6">
-    <h1 class="font-bold text-4xl">Scientific journals</h1>
-    <%= link_to "New scientific journal", new_scientific_journal_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    <h1 class="font-bold text-4xl">Revistas</h1>
+    <%= link_to "Criar revista", new_scientific_journal_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
   <div id="scientific_journals" class="p-4 bg-gray-200">
@@ -24,8 +24,8 @@
             </div>
 
             <div class="flex gap-2">
-              <%= link_to "Edit", edit_scientific_journal_path(scientific_journal), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-              <%= button_to "Destroy", scientific_journal, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+              <%= link_to "Editar", edit_scientific_journal_path(scientific_journal), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+              <%= button_to "Remover", scientific_journal, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
             </div>
 
         </div>

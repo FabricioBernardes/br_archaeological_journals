@@ -12,49 +12,49 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :volume %>
+    <%= form.label "Volume" %>
     <%= form.text_field :volume, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": edition.errors[:volume].none?, "border-red-400 focus:outline-red-600": edition.errors[:volume].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :publication_date %>
+    <%= form.label "Data da publicação" %>
     <%= form.date_field :publication_date, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": edition.errors[:publication_date].none?, "border-red-400 focus:outline-red-600": edition.errors[:publication_date].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :editors %>
+    <%= form.label "editores" %>
     <%= form.text_area :editors, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": edition.errors[:editors].none?, "border-red-400 focus:outline-red-600": edition.errors[:editors].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :theme %>
+    <%= form.label "Tema" %>
     <%= form.text_field :theme, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": edition.errors[:theme].none?, "border-red-400 focus:outline-red-600": edition.errors[:theme].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :edition_type %>
+    <%= form.label "Tipo da edição" %>
     <%= form.text_field :edition_type, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": edition.errors[:edition_type].none?, "border-red-400 focus:outline-red-600": edition.errors[:edition_type].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :doi %>
+    <%= form.label "DOI" %>
     <%= form.text_field :doi, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": edition.errors[:doi].none?, "border-red-400 focus:outline-red-600": edition.errors[:doi].any?}] %>
   </div>
 
   <div class="my-5">
-    <%= form.label :available_format %>
+    <%= form.label "Formatos disponíveis" %>
     <%= form.text_field :available_format, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": edition.errors[:available_format].none?, "border-red-400 focus:outline-red-600": edition.errors[:available_format].any?}] %>
   </div>
 
   <% if scientific_journal_id.present? %>
     <div class="my-5">
-      <%= form.label :scientific_journal_id %>
+      <%= form.label "Revista científica" %>
       <%= form.hidden_field :scientific_journal_id, value: scientific_journal_id %>
       <%= ScientificJournal.find(scientific_journal_id).name %>
     </div>
   <% else %>
     <div class="my-5">
-      <%= form.label :scientific_journal_id %>
+      <%= form.label "Revista científica" %>
       <%= form.collection_select :scientific_journal_id, ScientificJournal.all, :id, :name, { prompt: "Selecione a Revista" }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": edition.errors[:scientific_journal_id].none?, "border-red-400 focus:outline-red-600": edition.errors[:scientific_journal_id].any? }] %>
     </div>
   <% end %>

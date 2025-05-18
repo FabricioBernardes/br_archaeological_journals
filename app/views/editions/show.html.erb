@@ -7,8 +7,10 @@
 
   <div class="mb-4 text-sm breadcrumbs">
     <ul class="flex space-x-2">
-      <li><%= link_to "Revistas", scientific_journals_path %></li>
-      <li><%= link_to @edition.scientific_journal.name, scientific_journal_path(@edition.scientific_journal) %></li>
+      <li class="text-gray-500"><%= link_to "Revistas", scientific_journals_path %></li>
+      <li>/</li>
+      <li class="text-gray-500"><%= link_to @edition.scientific_journal.name, scientific_journal_path(@edition.scientific_journal) %></li>
+      <li>/</li>
       <li>Volume <%= @edition.volume %></li>
     </ul>
   </div>
@@ -50,19 +52,28 @@
     </div>
   </div>
 
-  <div class="w-full flex flex-col gap-2 mb-6">
-    <% if @articles.any? %>
-      <% @articles.each do |article| %>
-        <%= link_to article.title, article, class: "w-full px-3.5 py-2.5 bg-gray-100 border-b" %>
-      <% end %>
-    <% else %>
-      <p class="text-center my-10">Nenhum artigo encontrado.</p>
-    <% end %>
+  <div class="w-full grid grid-cols-3 gap-4 mt-5 mb-12">
+    <%= link_to "Editar dados da edição", edit_edition_path(@edition), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    <%= button_to "Remover edição", @edition, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
   </div>
 
-  <%= link_to "Criar novo artigo", new_article_path(article: { edition_id: @edition.id }), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium inline-block" %>
-
-  <%= link_to "Edit this edition", edit_edition_path(@edition), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to editions", editions_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this edition", @edition, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  <div class="w-full flex flex-col gap-2 mb-4">
+    <ul class="w-full">
+      <% if @articles.any? %>
+        <% @articles.each do |article| %>
+          <li class="w-full mb-5">
+            <a href="<%= article_path(article) %>" class="block px-3.5 py-2.5 bg-gray-100 border-b">
+              <p><%= article.title %></p>
+              <p class="text-sm text-gray-500"><%= article.authors %></p>
+            </a>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="block py-2.5 mb-5 font-semibold">Nenhum artigo encontrado.</li>
+      <% end %>
+      <li>
+        <%= link_to "Adicionar novo artigo", new_article_path(article: { edition_id: @edition.id }), class: "flex w-fit px-3.5 py-2.5 border-b mb-5 font-semibold" %>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -12,10 +12,11 @@
   </head>
 
   <body>
-    <%= render 'shared/nav'%>
+    <%= render 'shared/header'%>
     <%= render 'shared/notice_alert'%>
-    <main class="container mx-auto my-16 px-5 flex">
+    <main class="container mx-auto mt-24 mb-12 px-5 flex">
       <%= yield %>
     </main>
+    <%= render 'shared/footer'%>
   </body>
 </html>

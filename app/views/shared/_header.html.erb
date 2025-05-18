@@ -1,8 +1,12 @@
-<nav class="bg-stone-600 text-white p-4">
+<header class="bg-stone-600 text-white p-4 fixed top-0 left-0 right-0 z-10">
   <div class="container mx-auto flex justify-between items-center">
-    <a href="/">
-      <h1 class="text-2xl font-bold">Bibliometria Arqueológica</h1>
-    </a>
+    <div class="flex items-baseline">
+      <a href="/">
+        <h1 class="text-2xl font-bold">Bibliometria Arqueológica</h1>
+      </a>
+      <a href="/scientific_journals" class="ml-4">Revistas cientificas</a>
+    </div>
+
     <div>
       <% if user_signed_in? %>
         <p class="text-sm mb-2">Logged in as <%= current_user.email %></p>
@@ -19,4 +23,4 @@
       </div>
     </div>
   </div>
-</nav>
+</header>

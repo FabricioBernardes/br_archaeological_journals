@@ -17,7 +17,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create article" do
     assert_difference("Article.count") do
-      post articles_url, params: { article: { abstract: @article.abstract, article_url: @article.article_url, authors: @article.authors, bibliographic_reference: @article.bibliographic_reference, data_source: @article.data_source, database_citation: @article.database_citation, datings: @article.datings, doi: @article.doi, edition_id: @article.edition_id, institutions: @article.institutions, keywords: @article.keywords, laboratory_methods: @article.laboratory_methods, language: @article.language, main_methodology: @article.main_methodology, publication_type: @article.publication_type, research_theme: @article.research_theme, spatial_analysis: @article.spatial_analysis, states: @article.states, title: @article.title } }
+      post articles_url,
+           params: { article: { abstract: @article.abstract, article_url: @article.article_url, authors: @article.authors, bibliographic_reference: @article.bibliographic_reference,
+                                data_source: @article.data_source, database_citation: @article.database_citation, datings: @article.datings, doi: @article.doi, edition_id: @article.edition_id, institutions: @article.institutions, laboratory_methods: @article.laboratory_methods, language: @article.language, main_methodology: @article.main_methodology, publication_type: @article.publication_type, research_theme: @article.research_theme, spatial_analysis: @article.spatial_analysis, states: @article.states, title: @article.title } }
     end
 
     assert_redirected_to article_url(Article.last)
@@ -34,7 +36,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update article" do
-    patch article_url(@article), params: { article: { abstract: @article.abstract, article_url: @article.article_url, authors: @article.authors, bibliographic_reference: @article.bibliographic_reference, data_source: @article.data_source, database_citation: @article.database_citation, datings: @article.datings, doi: @article.doi, edition_id: @article.edition_id, institutions: @article.institutions, keywords: @article.keywords, laboratory_methods: @article.laboratory_methods, language: @article.language, main_methodology: @article.main_methodology, publication_type: @article.publication_type, research_theme: @article.research_theme, spatial_analysis: @article.spatial_analysis, states: @article.states, title: @article.title } }
+    patch article_url(@article),
+          params: { article: { abstract: @article.abstract, article_url: @article.article_url, authors: @article.authors, bibliographic_reference: @article.bibliographic_reference,
+                               data_source: @article.data_source, database_citation: @article.database_citation, datings: @article.datings, doi: @article.doi, edition_id: @article.edition_id, institutions: @article.institutions, laboratory_methods: @article.laboratory_methods, language: @article.language, main_methodology: @article.main_methodology, publication_type: @article.publication_type, research_theme: @article.research_theme, spatial_analysis: @article.spatial_analysis, states: @article.states, title: @article.title } }
     assert_redirected_to article_url(@article)
   end
 

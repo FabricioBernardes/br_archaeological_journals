@@ -6,7 +6,6 @@ one:
   abstract: MyText
   doi: MyString
   article_url: MyString
-  keywords: MyText
   language: MyString
   research_theme: MyString
   publication_type: MyString
@@ -27,7 +26,6 @@ two:
   abstract: MyText
   doi: MyString
   article_url: MyString
-  keywords: MyText
   language: MyString
   research_theme: MyString
   publication_type: MyString

@@ -24,7 +24,6 @@ class ArticlesTest < ApplicationSystemTestCase
     fill_in "Doi", with: @article.doi
     fill_in "Edition", with: @article.edition_id
     fill_in "Institutions", with: @article.institutions
-    fill_in "Keywords", with: @article.keywords
     fill_in "Laboratory methods", with: @article.laboratory_methods
     fill_in "Language", with: @article.language
     fill_in "Main methodology", with: @article.main_methodology
@@ -53,7 +52,6 @@ class ArticlesTest < ApplicationSystemTestCase
     fill_in "Doi", with: @article.doi
     fill_in "Edition", with: @article.edition_id
     fill_in "Institutions", with: @article.institutions
-    fill_in "Keywords", with: @article.keywords
     fill_in "Laboratory methods", with: @article.laboratory_methods
     fill_in "Language", with: @article.language
     fill_in "Main methodology", with: @article.main_methodology

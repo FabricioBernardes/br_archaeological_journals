@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_17_161207) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_19_132314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_17_161207) do
     t.text "abstract"
     t.string "doi"
     t.string "article_url"
-    t.text "keywords"
     t.string "language"
     t.string "research_theme"
     t.string "publication_type"

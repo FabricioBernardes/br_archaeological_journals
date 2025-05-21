@@ -20,6 +20,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1/edit
   def edit
     @editions = Edition.all.includes(:scientific_journal).order('scientific_journals.name, editions.volume')
+    @keywords = Keyword.all
   end
 
   # POST /articles or /articles.json
@@ -70,6 +71,6 @@ class ArticlesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def article_params
     params.require(:article).permit(:title, :authors, :abstract, :doi, :article_url, :language, :research_theme, :publication_type, :main_methodology, :bibliographic_reference,
-                                    :institutions, :data_source, :database_citation, :states, :spatial_analysis, :laboratory_methods, :datings, :edition_id)
+                                    :institutions, :data_source, :database_citation, :states, :spatial_analysis, :laboratory_methods, :datings, :edition_id, :keywords)
   end
 end

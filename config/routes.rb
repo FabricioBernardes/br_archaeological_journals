@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :articles
   resources :editions
   resources :scientific_journals
+  resources :keywords
   devise_for :users
   get "home/index"
 

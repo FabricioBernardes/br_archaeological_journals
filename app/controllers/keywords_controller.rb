@@ -3,7 +3,15 @@ class KeywordsController < ApplicationController
 
   # GET /keywords or /keywords.json
   def index
-    @keywords = Keyword.all
+    @keywords = if params[:query].present?
+                  Keyword.where("name ILIKE ?", "%#{params[:query]}%")
+                else
+                  Keyword.all
+                end
+    respond_to do |format|
+      format.html
+      format.json { render json: @keywords.select(:id, :name) }
+    end
   end
 
   # GET /keywords/1 or /keywords/1.json
@@ -21,16 +29,10 @@ class KeywordsController < ApplicationController
 
   # POST /keywords or /keywords.json
   def create
-    @keyword = Keyword.new(keyword_params)
-
+    @keyword = Keyword.find_or_create_by(name: keyword_params[:name])
     respond_to do |format|
-      if @keyword.save
-        format.html { redirect_to @keyword, notice: "Keyword was successfully created." }
-        format.json { render :show, status: :created, location: @keyword }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @keyword.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @keyword, notice: "Keyword was successfully created." }
+      format.json { render json: { id: @keyword.id, name: @keyword.name } }
     end
   end
 
@@ -66,6 +68,6 @@ class KeywordsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def keyword_params
-    params.fetch(:keyword, {})
+    params.require(:keyword).permit(:name)
   end
 end

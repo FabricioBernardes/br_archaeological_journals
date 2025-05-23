@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :articles
   resources :editions
   resources :scientific_journals
-  resources :keywords
+  resources :keywords, defaults: { format: :json }
   devise_for :users
   get "home/index"
 

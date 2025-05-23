@@ -27,20 +27,43 @@
 
   <div class="my-5">
     <%= form.label "Palavras-chave" %>
-    <div class="flex flex-wrap gap-2 mb-2" data-controller="keywords">
-      <% @article.keywords.each_with_index do |keyword, idx| %>
-        <span class="inline-flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded" data-keywords-target="keywordTag" data-keywords-index="<%= keyword.id %>">
-          <%= keyword.name %>
-          <button
-            type="button"
-            class="ml-2 text-red-500 hover:text-red-700 font-bold"
-            data-action="click->keywords#removeKeyword"
-            data-keywords-index="<%= keyword.id %>"
-          >
-            &times;
-          </button>
-        </span>
-      <% end %>
+    <div class="flex flex-col gap-2 mb-2" data-controller="keywords">
+      <div class="flex flex-wrap gap-2 mb-2">
+        <% @article.keywords.each_with_index do |keyword, idx| %>
+          <span class="inline-flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded" data-keywords-target="keywordTag" data-keywords-index="<%= keyword.id %>">
+            <%= keyword.name %>
+            <button
+              type="button"
+              class="ml-2 text-red-500 hover:text-red-700 font-bold cursor-pointer"
+              data-action="click->keywords#removeKeyword"
+              data-keywords-index="<%= keyword.id %>"
+            >
+              &times;
+            </button>
+            <input type="hidden" name="article[keyword_ids][]" value="<%= keyword.id %>">
+          </span>
+        <% end %>
+      </div>
+
+      <div>
+        <input
+          type="text"
+          name="new_keyword"
+          placeholder="Adicionar palavra-chave"
+          class="border rounded px-2 py-1 w-48"
+          data-action="input->keywords#autocomplete keydown->keywords#handleKeydown"
+          data-keywords-target="input"
+          autocomplete="off"
+        />
+        <ul class="absolute bg-white border rounded shadow mt-1 z-10 w-48 hidden" data-keywords-target="suggestions"></ul>
+        <button
+          type="button"
+          class="ml-2 bg-blue-500 text-white px-2 py-1 rounded"
+        >
+          Adicionar
+        </button>
+      </div>
+
     </div>
   </div>
 

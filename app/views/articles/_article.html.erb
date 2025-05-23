@@ -10,7 +10,14 @@
     <strong class="block font-medium mb-1">Resumo:</strong>
     <%= article.abstract %>
   </div>
-
+  <div>
+    <strong class="block font-medium mb-1">Palavras-chave:</strong>
+    <% article.keywords.each do |article| %>
+      <span class="inline-block bg-gray-200 text-gray-700 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded">
+        <%= article.name %>
+      </span>
+    <% end %>
+  </div>
   <div class="grid grid-cols-2 gap-4 my-8 border-b pb-4">
     <div>
       <strong class="block font-medium mb-1">DOI:</strong>

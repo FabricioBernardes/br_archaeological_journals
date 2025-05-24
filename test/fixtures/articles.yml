@@ -10,7 +10,6 @@ one:
   research_theme: MyString
   publication_type: MyString
   main_methodology: MyString
-  bibliographic_reference: MyText
   institutions: MyText
   data_source: MyString
   database_citation: MyText
@@ -30,7 +29,6 @@ two:
   research_theme: MyString
   publication_type: MyString
   main_methodology: MyString
-  bibliographic_reference: MyText
   institutions: MyText
   data_source: MyString
   database_citation: MyText

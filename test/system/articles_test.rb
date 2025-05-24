@@ -17,7 +17,6 @@ class ArticlesTest < ApplicationSystemTestCase
     fill_in "Abstract", with: @article.abstract
     fill_in "Article url", with: @article.article_url
     fill_in "Authors", with: @article.authors
-    fill_in "Bibliographic reference", with: @article.bibliographic_reference
     fill_in "Data source", with: @article.data_source
     fill_in "Database citation", with: @article.database_citation
     fill_in "Datings", with: @article.datings
@@ -45,7 +44,6 @@ class ArticlesTest < ApplicationSystemTestCase
     fill_in "Abstract", with: @article.abstract
     fill_in "Article url", with: @article.article_url
     fill_in "Authors", with: @article.authors
-    fill_in "Bibliographic reference", with: @article.bibliographic_reference
     fill_in "Data source", with: @article.data_source
     fill_in "Database citation", with: @article.database_citation
     fill_in "Datings", with: @article.datings

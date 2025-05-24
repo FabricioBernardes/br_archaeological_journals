@@ -45,21 +45,22 @@ export default class extends Controller {
   }
 
   handleKeydown(event) {
-    if (this.suggestions.length === 0) return;
-    if (event.key === "ArrowDown") {
+    if (event.key === "Enter") {
       event.preventDefault();
-      this.selectedSuggestionIndex = Math.min(this.selectedSuggestionIndex + 1, this.suggestions.length - 1);
-      this.updateSuggestionHighlight();
-    } else if (event.key === "ArrowUp") {
-      event.preventDefault();
-      this.selectedSuggestionIndex = Math.max(this.selectedSuggestionIndex - 1, 0);
-      this.updateSuggestionHighlight();
-    } else if (event.key === "Enter") {
-      event.preventDefault();
-      if (this.selectedSuggestionIndex >= 0) {
+      if (this.suggestions && this.suggestions.length > 0 && this.selectedSuggestionIndex >= 0) {
         this.addKeywordFromSuggestion(this.selectedSuggestionIndex);
       } else if (this.inputTarget.value.trim() !== "") {
         this.addKeywordByName(this.inputTarget.value.trim());
+      }
+    } else if (this.suggestions && this.suggestions.length > 0) {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        this.selectedSuggestionIndex = Math.min(this.selectedSuggestionIndex + 1, this.suggestions.length - 1);
+        this.updateSuggestionHighlight();
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        this.selectedSuggestionIndex = Math.max(this.selectedSuggestionIndex - 1, 0);
+        this.updateSuggestionHighlight();
       }
     }
   }

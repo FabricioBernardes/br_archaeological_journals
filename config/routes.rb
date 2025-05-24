@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bibliographic_references
   resources :articles
   resources :editions
   resources :scientific_journals

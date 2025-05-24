@@ -1,0 +1,2 @@
+module BibliographicReferencesHelper
+end

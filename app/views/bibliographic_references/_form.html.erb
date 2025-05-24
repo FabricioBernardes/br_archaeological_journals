@@ -1,0 +1,57 @@
+<%= form_with(model: bibliographic_reference, class: "contents") do |form| %>
+  <% if bibliographic_reference.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(bibliographic_reference.errors.count, "error") %> prohibited this bibliographic_reference from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% bibliographic_reference.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :reference_type %>
+    <%= form.text_field :reference_type, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": bibliographic_reference.errors[:reference_type].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:reference_type].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :authors %>
+    <%= form.text_area :authors, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": bibliographic_reference.errors[:authors].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:authors].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :year %>
+    <%= form.number_field :year, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": bibliographic_reference.errors[:year].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:year].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": bibliographic_reference.errors[:title].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:title].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :publisher %>
+    <%= form.text_field :publisher, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": bibliographic_reference.errors[:publisher].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:publisher].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :publication_location %>
+    <%= form.text_field :publication_location, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": bibliographic_reference.errors[:publication_location].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:publication_location].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :doi %>
+    <%= form.text_field :doi, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": bibliographic_reference.errors[:doi].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:doi].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :language %>
+    <%= form.text_field :language, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": bibliographic_reference.errors[:language].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:language].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

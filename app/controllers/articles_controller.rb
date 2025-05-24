@@ -15,12 +15,14 @@ class ArticlesController < ApplicationController
     @article = Article.new
     @article.edition_id = params[:edition_id] if params[:edition_id]
     @editions = Edition.all.includes(:scientific_journal).order('scientific_journals.name, editions.volume')
+    @bibliographic_references = BibliographicReference.all
   end
 
   # GET /articles/1/edit
   def edit
     @editions = Edition.all.includes(:scientific_journal).order('scientific_journals.name, editions.volume')
     @keywords = Keyword.all
+    @bibliographic_references = BibliographicReference.all
   end
 
   # POST /articles or /articles.json
@@ -71,6 +73,6 @@ class ArticlesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def article_params
     params.require(:article).permit(:title, :authors, :abstract, :doi, :article_url, :language, :research_theme, :publication_type, :main_methodology,
-                                    :institutions, :data_source, :database_citation, :states, :spatial_analysis, :laboratory_methods, :datings, :edition_id, keyword_ids: [])
+                                    :institutions, :data_source, :database_citation, :states, :spatial_analysis, :laboratory_methods, :datings, :edition_id, keyword_ids: [], bibliographic_reference_ids: [])
   end
 end

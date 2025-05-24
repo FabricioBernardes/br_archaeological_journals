@@ -1,9 +1,17 @@
 class BibliographicReferencesController < ApplicationController
-  before_action :set_bibliographic_reference, only: %i[ show edit update destroy ]
+  before_action :set_bibliographic_reference, only: %i[show edit update destroy]
 
   # GET /bibliographic_references or /bibliographic_references.json
   def index
-    @bibliographic_references = BibliographicReference.all
+    @bibliographic_references = if params[:query].present?
+                                  BibliographicReference.where("title ILIKE ?", "%#{params[:query]}%")
+                                else
+                                  BibliographicReference.all
+                                end
+    respond_to do |format|
+      format.html
+      format.json { render json: @bibliographic_references.select(:id, :title, :reference_type, :authors, :year, :publisher, :publication_location, :doi, :language) }
+    end
   end
 
   # GET /bibliographic_references/1 or /bibliographic_references/1.json
@@ -58,13 +66,14 @@ class BibliographicReferencesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bibliographic_reference
-      @bibliographic_reference = BibliographicReference.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bibliographic_reference_params
-      params.require(:bibliographic_reference).permit(:reference_type, :authors, :year, :title, :publisher, :publication_location, :doi, :language)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bibliographic_reference
+    @bibliographic_reference = BibliographicReference.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def bibliographic_reference_params
+    params.require(:bibliographic_reference).permit(:reference_type, :authors, :year, :title, :publisher, :publication_location, :doi, :language)
+  end
 end

@@ -119,7 +119,14 @@ export default class extends Controller {
     span.innerHTML = `${name}
       <button type="button" class="ml-2 text-red-500 hover:text-red-700 font-bold cursor-pointer" data-action="click->keywords#removeKeyword" data-keywords-index="${id}">&times;</button>
       <input type="hidden" name="article[keyword_ids][]" value="${id}">`;
-    this.inputTarget.parentNode.parentNode.insertBefore(span, this.inputTarget.parentNode);
+    // Encontra o container correto das tags existentes
+    const container = this.inputTarget.closest('.flex.flex-col').querySelector('.flex.flex-wrap');
+    if (container) {
+      container.appendChild(span);
+    } else {
+      // fallback antigo
+      this.inputTarget.parentNode.parentNode.insertBefore(span, this.inputTarget.parentNode);
+    }
   }
 
   removeKeyword(event) {

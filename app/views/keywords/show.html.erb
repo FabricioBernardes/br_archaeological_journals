@@ -7,6 +7,14 @@
 
   <h1 class="font-bold text-4xl">Showing keyword</h1>
 
+  <div class="mb-4 text-sm breadcrumbs w-full">
+    <ul class="flex space-x-2">
+      <li class="text-gray-500"><%= link_to "Palavras-chave", keywords_path %></li>
+      <li>/</li>
+      <li class="font-semibold"><%= @keyword.name %></li>
+    </ul>
+  </div>
+
   <%= render @keyword %>
 
   <%= link_to "Edit this keyword", edit_keyword_path(@keyword), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>

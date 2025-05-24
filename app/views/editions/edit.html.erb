@@ -1,6 +1,16 @@
 <% content_for :title, "Editing edition" %>
 
 <div class="max-w-7xl mx-auto container w-full">
+  <div class="mb-4 text-sm breadcrumbs w-full">
+    <ul class="flex space-x-2">
+      <li class="text-gray-500"><%= link_to "Revistas", scientific_journals_path %></li>
+      <li>/</li>
+      <li class="text-gray-500"><%= link_to @edition.scientific_journal.name, scientific_journal_path(@edition.scientific_journal) %></li>
+      <li>/</li>
+      <li class="font-semibold">Editar edição</li>
+    </ul>
+  </div>
+
   <h1 class="font-bold text-4xl">Editar dados da edição</h1>
 
   <%= render "form", edition: @edition, scientific_journal_id: params.dig(:edition, :edition_id) %>

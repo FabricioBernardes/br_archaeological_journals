@@ -4,6 +4,14 @@
   <div class="max-w-3xl mx-auto p-6 bg-gray-200 shadow-md rounded-lg">
     <h1 class="text-2xl font-bold mb-6">Editar dados da revista</h1>
 
+    <div class="mb-4 text-sm breadcrumbs w-full">
+      <ul class="flex space-x-2">
+        <li class="text-gray-500"><%= link_to "Revistas", scientific_journals_path %></li>
+        <li>/</li>
+        <li class="font-semibold">Editar revista</li>
+      </ul>
+    </div>
+
     <div class="mb-6">
       <%= render "form", scientific_journal: @scientific_journal %>
     </div>

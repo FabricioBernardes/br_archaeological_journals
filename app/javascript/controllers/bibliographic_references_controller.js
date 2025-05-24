@@ -151,4 +151,44 @@ export default class extends Controller {
     const tag = btn.closest("span");
     if (tag) tag.remove();
   }
+
+  // Adiciona uma nova referência a partir dos campos do formulário
+  addNewReference(event) {
+    event.preventDefault();
+    // Busca o wrapper do formulário de nova referência
+    const formWrapper = event.target.closest('.border.rounded.p-3.bg-gray-50');
+    if (!formWrapper) return;
+    const fields = formWrapper.querySelectorAll('input[name^="new_bibliographic_reference["]');
+    const newRef = {};
+    fields.forEach(input => {
+      const key = input.name.match(/new_bibliographic_reference\[(.*)\]/)[1];
+      newRef[key] = input.value.trim();
+    });
+    // Validação simples
+    if (!newRef.title) {
+      alert('Título é obrigatório para cadastrar uma nova referência.');
+      return;
+    }
+    // Envia para o backend via fetch (ajuste a rota conforme necessário)
+    fetch('/bibliographic_references', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ bibliographic_reference: newRef })
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.id) {
+          this.addReference(data);
+          // Limpa os campos do formulário
+          fields.forEach(input => input.value = '');
+        } else {
+          alert('Erro ao cadastrar referência.');
+        }
+      })
+      .catch(() => alert('Erro ao cadastrar referência.'));
+  }
 }

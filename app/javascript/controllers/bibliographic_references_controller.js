@@ -37,19 +37,37 @@ export default class extends Controller {
           return;
         }
         this.suggestionsTarget.innerHTML = data.map((ref, i) =>
-          `<li class='px-2 py-1 cursor-pointer hover:bg-green-100' data-index='${i}'>${ref.title}</li>`
+          `<li class='px-2 py-1 cursor-pointer hover:bg-green-100 flex items-center justify-between' data-index='${i}'>
+            <span>${ref.title}</span>
+            <button type='button' class='ml-2 bg-green-500 text-white px-2 py-1 rounded add-ref-btn' data-index='${i}'>Adicionar</button>
+          </li>`
         ).join("");
         this.suggestionsTarget.classList.remove("hidden");
         this.selectedSuggestionIndex = -1;
-        // Adiciona event listener para clique nas sugestões
+        // Adiciona event listener para clique nas sugestões e botões
         this.suggestionsTarget.querySelectorAll('li').forEach(li => {
           li.addEventListener('click', (e) => {
-            const idx = parseInt(li.getAttribute('data-index'));
-            this.addReferenceFromSuggestion(idx);
-            this.inputTarget.value = "";
-            this.suggestionsTarget.classList.add("hidden");
-            this.suggestionsTarget.innerHTML = "";
+            // Só executa se não for o botão
+            if (!e.target.classList.contains('add-ref-btn')) {
+              const idx = parseInt(li.getAttribute('data-index'));
+              this.addReferenceFromSuggestion(idx);
+              this.inputTarget.value = "";
+              this.suggestionsTarget.classList.add("hidden");
+              this.suggestionsTarget.innerHTML = "";
+            }
           });
+          // Botão de adicionar
+          const btn = li.querySelector('.add-ref-btn');
+          if (btn) {
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const idx = parseInt(btn.getAttribute('data-index'));
+              this.addReferenceFromSuggestion(idx);
+              this.inputTarget.value = "";
+              this.suggestionsTarget.classList.add("hidden");
+              this.suggestionsTarget.innerHTML = "";
+            });
+          }
         });
       });
   }
@@ -119,7 +137,13 @@ export default class extends Controller {
       <button type='button' class='ml-2 text-red-500 hover:text-red-700 font-bold cursor-pointer' data-action='click->bibliographic-references#removeReference' data-bibliographic-references-index='${ref.id}'>&times;</button>
       <input type='hidden' name='article[bibliographic_reference_ids][]' value='${ref.id}'>
     `;
-    this.inputTarget.parentNode.parentNode.querySelector(".flex.flex-wrap").appendChild(tag);
+    // Busca o container correto para inserir a tag
+    const container = this.element.querySelector(".flex.flex-wrap");
+    if (container) {
+      container.appendChild(tag);
+    } else {
+      console.error("Container for bibliographic references not found.");
+    }
   }
 
   removeReference(event) {

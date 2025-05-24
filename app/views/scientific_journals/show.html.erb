@@ -6,6 +6,14 @@
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
     <% end %>
 
+    <div class="mb-4 text-sm breadcrumbs w-full">
+      <ul class="flex space-x-2">
+        <li class="text-gray-500"><%= link_to "Revistas", scientific_journals_path %></li>
+        <li>/</li>
+        <li class="font-semibold"><%= @scientific_journal.name %></li>
+      </ul>
+    </div>
+
     <div class="mb-6">
       <h1 class="text-2xl font-bold text-gray-800 mb-8">
         <%= @scientific_journal.name %>

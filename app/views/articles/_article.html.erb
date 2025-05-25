@@ -3,6 +3,12 @@
     <h1 class="text-3xl"><%= article.title %></h1>
   </div>
   <div>
+    <strong class="block font-medium mb-1">Autores:</strong>
+    <div class="flex flex-wrap gap-2">
+      <%= article.authors.map { |author| author.name }.to_sentence(last_word_connector: ', ', two_words_connector: ', ') %>
+    </div>
+  </div>
+  <div>
     <strong class="block font-medium mb-1">Resumo:</strong>
     <%= article.abstract %>
   </div>

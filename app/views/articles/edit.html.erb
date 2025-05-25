@@ -5,11 +5,11 @@
 
   <div class="mb-4 text-sm breadcrumbs w-full">
     <ul class="flex space-x-2">
-      <li class="text-gray-500"><%= link_to "Revistas", scientific_journals_path %></li>
+      <li class="text-stone-500"><%= link_to "Revistas", scientific_journals_path %></li>
       <li>/</li>
-      <li class="text-gray-500"><%= link_to @article.edition.scientific_journal.name, scientific_journal_path(@article.edition.scientific_journal) %></li>
+      <li class="text-stone-500"><%= link_to @article.edition.scientific_journal.name, scientific_journal_path(@article.edition.scientific_journal) %></li>
       <li>/</li>
-      <li class="text-gray-500"><%= link_to "Volume #{@article.edition.volume}", edition_path(@article.edition) %></li>
+      <li class="text-stone-500"><%= link_to "Volume #{@article.edition.volume}", edition_path(@article.edition) %></li>
       <li>/</li>
       <li class="font-semibold">Editar artigo</li>
     </ul>
@@ -17,5 +17,5 @@
 
   <%= render "form", article: @article, keywords: @keywords, edition_id: params.dig(:article, :edition_id) %>
 
-  <%= link_to "Show this article", @article, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Show this article", @article, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
 </div>

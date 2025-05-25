@@ -156,7 +156,7 @@ export default class extends Controller {
   addNewReference(event) {
     event.preventDefault();
     // Busca o wrapper do formulário de nova referência
-    const formWrapper = event.target.closest('.border.rounded.p-3.bg-gray-50');
+    const formWrapper = event.target.closest('.border.rounded.p-3.bg-stone-50');
     if (!formWrapper) return;
     const fields = formWrapper.querySelectorAll('input[name^="new_bibliographic_reference["]');
     const newRef = {};

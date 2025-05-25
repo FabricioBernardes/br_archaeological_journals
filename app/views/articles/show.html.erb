@@ -5,11 +5,11 @@
 
   <div class="mb-4 text-sm breadcrumbs w-full">
     <ul class="flex space-x-2">
-      <li class="text-gray-500"><%= link_to "Revistas", scientific_journals_path %></li>
+      <li class="text-stone-500"><%= link_to "Revistas", scientific_journals_path %></li>
       <li>/</li>
-      <li class="text-gray-500"><%= link_to @article.edition.scientific_journal.name, scientific_journal_path(@article.edition.scientific_journal) %></li>
+      <li class="text-stone-500"><%= link_to @article.edition.scientific_journal.name, scientific_journal_path(@article.edition.scientific_journal) %></li>
       <li>/</li>
-      <li class="text-gray-500"><%= link_to "Volume #{@article.edition.volume}", edition_path(@article.edition) %></li>
+      <li class="text-stone-500"><%= link_to "Volume #{@article.edition.volume}", edition_path(@article.edition) %></li>
       <li>/</li>
       <li class="font-semibold"><%= @article.title %></li>
     </ul>
@@ -17,6 +17,6 @@
 
   <%= render @article %>
 
-  <%= link_to "Editar artigo", edit_article_path(@article), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Editar artigo", edit_article_path(@article), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
   <%= button_to "Remover artigo", @article, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
 </div>

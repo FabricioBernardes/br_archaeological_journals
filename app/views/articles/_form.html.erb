@@ -13,12 +13,12 @@
 
   <div class="my-5">
     <%= form.label "Título" %>
-    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:title].none?, "border-red-400 focus:outline-red-600": article.errors[:title].any?}] %>
+    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:title].none?, "border-red-400 focus:outline-red-600": article.errors[:title].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Resumo" %>
-    <%= form.text_area :abstract, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:abstract].none?, "border-red-400 focus:outline-red-600": article.errors[:abstract].any?}] %>
+    <%= form.text_area :abstract, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:abstract].none?, "border-red-400 focus:outline-red-600": article.errors[:abstract].any?}] %>
   </div>
 
     <div class="my-5">
@@ -105,67 +105,67 @@
 
   <div class="my-5">
     <%= form.label "DOI" %>
-    <%= form.text_field :doi, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:doi].none?, "border-red-400 focus:outline-red-600": article.errors[:doi].any?}] %>
+    <%= form.text_field :doi, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:doi].none?, "border-red-400 focus:outline-red-600": article.errors[:doi].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "URL do artigo" %>
-    <%= form.text_field :article_url, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:article_url].none?, "border-red-400 focus:outline-red-600": article.errors[:article_url].any?}] %>
+    <%= form.text_field :article_url, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:article_url].none?, "border-red-400 focus:outline-red-600": article.errors[:article_url].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Idioma da publicação" %>
-    <%= form.text_field :language, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:language].none?, "border-red-400 focus:outline-red-600": article.errors[:language].any?}] %>
+    <%= form.text_field :language, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:language].none?, "border-red-400 focus:outline-red-600": article.errors[:language].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Tema da pesquisa" %>
-    <%= form.text_field :research_theme, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:research_theme].none?, "border-red-400 focus:outline-red-600": article.errors[:research_theme].any?}] %>
+    <%= form.text_field :research_theme, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:research_theme].none?, "border-red-400 focus:outline-red-600": article.errors[:research_theme].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Tipo de publicação" %>
-    <%= form.text_field :publication_type, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:publication_type].none?, "border-red-400 focus:outline-red-600": article.errors[:publication_type].any?}] %>
+    <%= form.text_field :publication_type, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:publication_type].none?, "border-red-400 focus:outline-red-600": article.errors[:publication_type].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Metodologia principal" %>
-    <%= form.text_field :main_methodology, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:main_methodology].none?, "border-red-400 focus:outline-red-600": article.errors[:main_methodology].any?}] %>
+    <%= form.text_field :main_methodology, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:main_methodology].none?, "border-red-400 focus:outline-red-600": article.errors[:main_methodology].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Instituições" %>
-    <%= form.text_area :institutions, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:institutions].none?, "border-red-400 focus:outline-red-600": article.errors[:institutions].any?}] %>
+    <%= form.text_area :institutions, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:institutions].none?, "border-red-400 focus:outline-red-600": article.errors[:institutions].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Fonte dos dados" %>
-    <%= form.text_field :data_source, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:data_source].none?, "border-red-400 focus:outline-red-600": article.errors[:data_source].any?}] %>
+    <%= form.text_field :data_source, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:data_source].none?, "border-red-400 focus:outline-red-600": article.errors[:data_source].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Citação a banco de dados" %>
-    <%= form.text_area :database_citation, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:database_citation].none?, "border-red-400 focus:outline-red-600": article.errors[:database_citation].any?}] %>
+    <%= form.text_area :database_citation, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:database_citation].none?, "border-red-400 focus:outline-red-600": article.errors[:database_citation].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Delimitação estadual da pesquisa" %>
-    <%= form.text_field :states, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:states].none?, "border-red-400 focus:outline-red-600": article.errors[:states].any?}] %>
+    <%= form.text_field :states, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:states].none?, "border-red-400 focus:outline-red-600": article.errors[:states].any?}] %>
   </div>
 
   <div class="my-5 flex items-center gap-2">
     <%= form.label "Analise espacial" %>
-    <%= form.check_box :spatial_analysis, class: ["block shadow-sm rounded-md border order-first h-5 w-5", {"border-gray-400 focus:outline-blue-600": article.errors[:spatial_analysis].none?, "border-red-400 focus:outline-red-600": article.errors[:spatial_analysis].any?}] %>
+    <%= form.check_box :spatial_analysis, class: ["block shadow-sm rounded-md border order-first h-5 w-5", {"border-stone-400 focus:outline-blue-600": article.errors[:spatial_analysis].none?, "border-red-400 focus:outline-red-600": article.errors[:spatial_analysis].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "métodos de laboratório" %>
-    <%= form.text_area :laboratory_methods, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:laboratory_methods].none?, "border-red-400 focus:outline-red-600": article.errors[:laboratory_methods].any?}] %>
+    <%= form.text_area :laboratory_methods, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:laboratory_methods].none?, "border-red-400 focus:outline-red-600": article.errors[:laboratory_methods].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label "Datações" %>
-    <%= form.text_area :datings, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": article.errors[:datings].none?, "border-red-400 focus:outline-red-600": article.errors[:datings].any?}] %>
+    <%= form.text_area :datings, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:datings].none?, "border-red-400 focus:outline-red-600": article.errors[:datings].any?}] %>
   </div>
 
   <% if edition_id.present? %>
@@ -186,7 +186,7 @@
     <div class="flex flex-col gap-2 mb-2" data-controller="bibliographic-references">
       <div class="flex flex-wrap gap-2 mb-2">
         <% @article.bibliographic_references.each do |reference| %>
-          <span class="flex bg-gray-100 text-black px-2 py-1 rounded" data-bibliographic-references-target="referenceTag" data-bibliographic-references-index="<%= reference.id %>">
+          <span class="flex bg-stone-100 text-black px-2 py-1 rounded" data-bibliographic-references-target="referenceTag" data-bibliographic-references-index="<%= reference.id %>">
             <span><%= reference.title %> (<%= reference.year %>)</span>
             <button
               type="button"
@@ -215,7 +215,7 @@
           <ul class="absolute bg-white border rounded shadow mt-1 z-10 w-96 hidden" data-bibliographic-references-target="suggestions"></ul>
         </div>
       </div>
-      <div class="border rounded p-3 bg-gray-50 mt-2">
+      <div class="border rounded p-3 bg-stone-50 mt-2">
         <p class="mb-2">Cadastrar nova referência</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
           <input type="text" name="new_bibliographic_reference[title]" placeholder="Título" class="border rounded px-2 py-1 w-full" />

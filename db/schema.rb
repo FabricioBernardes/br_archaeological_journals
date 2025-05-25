@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_24_191159) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_25_202207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "article_authors", force: :cascade do |t|
+    t.bigint "article_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_article_authors_on_article_id"
+    t.index ["author_id"], name: "index_article_authors_on_author_id"
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string "title"
-    t.text "authors"
     t.text "abstract"
     t.string "doi"
     t.string "article_url"
@@ -47,6 +55,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_24_191159) do
     t.bigint "keyword_id", null: false
     t.index ["article_id", "keyword_id"], name: "index_articles_keywords_on_article_id_and_keyword_id"
     t.index ["keyword_id", "article_id"], name: "index_articles_keywords_on_keyword_id_and_article_id"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.string "country_of_origin"
+    t.string "institutional_affiliation"
+    t.string "specialization_area"
+    t.text "academic_background"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bibliographic_references", force: :cascade do |t|
@@ -110,6 +128,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_24_191159) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "article_authors", "articles"
+  add_foreign_key "article_authors", "authors"
   add_foreign_key "articles", "editions"
   add_foreign_key "editions", "scientific_journals"
 end

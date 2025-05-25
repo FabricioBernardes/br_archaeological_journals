@@ -84,10 +84,19 @@
 
   <div>
     <strong class="block font-medium mb-1">Referências bibliográficas:</strong>
-    <% article.bibliographic_references.each do |reference| %>
-      <span class="inline-block bg-green-200 text-green-700 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded">
-        <%= reference.title %>
-      </span>
-    <% end %>
+    <ul class="list-disc ml-6">
+      <% article.bibliographic_references.each do |reference| %>
+        <li class="mb-2">
+          <%= reference.authors.presence ? reference.authors.upcase + ". " : "" %>
+          <strong><%= reference.title %>.</strong>
+          <%= reference.publication_location.presence ? reference.publication_location + ": " : "" %>
+          <%= reference.publisher.presence ? reference.publisher + ", " : "" %>
+          <%= reference.year.presence ? reference.year.to_s + "." : "" %>
+          <% if reference.doi.present? %>
+            DOI: <%= reference.doi %>.
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

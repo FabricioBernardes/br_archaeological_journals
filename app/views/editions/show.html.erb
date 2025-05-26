@@ -64,7 +64,9 @@
           <li class="w-full mb-5">
             <a href="<%= article_path(article) %>" class="block px-3.5 py-2.5 bg-stone-100 border-b">
               <p><%= article.title %></p>
-              <p class="text-sm text-stone-500"><%= article.authors %></p>
+              <p class="text-sm text-stone-500">
+                <%= article.authors.map(&:name).join(", ") %>
+              </p>
             </a>
           </li>
         <% end %>

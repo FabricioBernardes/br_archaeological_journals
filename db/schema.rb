@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_25_220000) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_26_153736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,7 +75,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_25_220000) do
 
   create_table "bibliographic_references", force: :cascade do |t|
     t.string "reference_type"
-    t.text "authors"
     t.integer "year"
     t.string "title"
     t.string "publisher"

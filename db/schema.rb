@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_26_154457) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_26_162000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_26_154457) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "author_refs_bibliographic_references", id: false, force: :cascade do |t|
+    t.bigint "author_ref_id", null: false
+    t.bigint "bibliographic_reference_id", null: false
+    t.index ["author_ref_id", "bibliographic_reference_id"], name: "idx_authref_bibref_authref_bibref"
+    t.index ["bibliographic_reference_id", "author_ref_id"], name: "idx_bibref_authref_bibref_authref"
   end
 
   create_table "authors", force: :cascade do |t|

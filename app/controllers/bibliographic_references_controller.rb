@@ -10,7 +10,7 @@ class BibliographicReferencesController < ApplicationController
                                 end
     respond_to do |format|
       format.html
-      format.json { render json: @bibliographic_references.select(:id, :title, :reference_type, :authors, :year, :publisher, :publication_location, :doi, :language) }
+      format.json { render json: @bibliographic_references.select(:id, :title, :reference_type, :year, :publisher, :publication_location, :doi, :language) }
     end
   end
 
@@ -74,6 +74,6 @@ class BibliographicReferencesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def bibliographic_reference_params
-    params.require(:bibliographic_reference).permit(:reference_type, :authors, :year, :title, :publisher, :publication_location, :doi, :language)
+    params.require(:bibliographic_reference).permit(:reference_type, :year, :title, :publisher, :publication_location, :doi, :language)
   end
 end

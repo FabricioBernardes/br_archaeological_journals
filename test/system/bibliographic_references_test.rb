@@ -14,7 +14,6 @@ class BibliographicReferencesTest < ApplicationSystemTestCase
     visit bibliographic_references_url
     click_on "New bibliographic reference"
 
-    fill_in "Authors", with: @bibliographic_reference.authors
     fill_in "Doi", with: @bibliographic_reference.doi
     fill_in "Language", with: @bibliographic_reference.language
     fill_in "Publication location", with: @bibliographic_reference.publication_location
@@ -32,7 +31,6 @@ class BibliographicReferencesTest < ApplicationSystemTestCase
     visit bibliographic_reference_url(@bibliographic_reference)
     click_on "Edit this bibliographic reference", match: :first
 
-    fill_in "Authors", with: @bibliographic_reference.authors
     fill_in "Doi", with: @bibliographic_reference.doi
     fill_in "Language", with: @bibliographic_reference.language
     fill_in "Publication location", with: @bibliographic_reference.publication_location

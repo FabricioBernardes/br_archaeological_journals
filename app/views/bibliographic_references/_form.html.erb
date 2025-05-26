@@ -17,11 +17,6 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :authors %>
-    <%= form.text_area :authors, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:authors].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:authors].any?}] %>
-  </div>
-
-  <div class="my-5">
     <%= form.label :year %>
     <%= form.number_field :year, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:year].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:year].any?}] %>
   </div>

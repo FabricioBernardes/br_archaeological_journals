@@ -162,8 +162,15 @@ export default class extends Controller {
     const newRef = {};
     fields.forEach(input => {
       const key = input.name.match(/new_bibliographic_reference\[(.*)\]/)[1];
-      newRef[key] = input.value.trim();
+      if (key !== 'author_refs_search') {
+        newRef[key] = input.value.trim();
+      }
     });
+    // Coleta os IDs dos autores selecionados
+    const authorIds = Array.from(formWrapper.querySelectorAll('input[name="new_bibliographic_reference[author_ref_ids][]"]')).map(i => i.value);
+    if (authorIds.length > 0) {
+      newRef.author_ref_ids = authorIds;
+    }
     // Validação simples
     if (!newRef.title) {
       alert('Título é obrigatório para cadastrar uma nova referência.');
@@ -185,6 +192,8 @@ export default class extends Controller {
           this.addReference(data);
           // Limpa os campos do formulário
           fields.forEach(input => input.value = '');
+          // Limpa os autores
+          formWrapper.querySelectorAll('span[data-authors-target="authorTag"]').forEach(tag => tag.remove());
         } else {
           alert('Erro ao cadastrar referência.');
         }

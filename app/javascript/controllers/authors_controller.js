@@ -27,7 +27,10 @@ export default class extends Controller {
       this.suggestionsTarget.innerHTML = "";
       return;
     }
-    fetch(`/authors.json?query=${encodeURIComponent(query)}`)
+    // Usa AuthorRef para referências bibliográficas
+    const isBibRef = this.element.dataset.authorsContext === 'bibliographic-reference';
+    const url = isBibRef ? `/author_refs.json?query=${encodeURIComponent(query)}` : `/authors.json?query=${encodeURIComponent(query)}`;
+    fetch(url)
       .then(r => r.json())
       .then(data => {
         this.suggestions = data;
@@ -89,14 +92,17 @@ export default class extends Controller {
   }
 
   addAuthorByName(name) {
-    fetch("/authors.json", {
+    const isBibRef = this.element.dataset.authorsContext === 'bibliographic-reference';
+    const url = isBibRef ? '/author_refs.json' : '/authors.json';
+    const body = isBibRef ? JSON.stringify({ author_ref: { name } }) : JSON.stringify({ author: { name } });
+    fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
         "Accept": "application/json"
       },
-      body: JSON.stringify({ author: { name } })
+      body
     })
       .then(r => r.json())
       .then(author => {
@@ -116,9 +122,12 @@ export default class extends Controller {
     span.className = "inline-flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded";
     span.dataset.authorsTarget = "authorTag";
     span.dataset.authorsIndex = id;
+    // Se for contexto de referência bibliográfica, muda o name do input
+    const isBibRef = this.element.dataset.authorsContext === 'bibliographic-reference';
+    const inputName = isBibRef ? 'new_bibliographic_reference[author_ref_ids][]' : 'article[author_ids][]';
     span.innerHTML = `${name}
       <button type="button" class="ml-2 text-red-500 hover:text-red-700 font-bold cursor-pointer" data-action="click->authors#removeAuthor" data-authors-index="${id}">&times;</button>
-      <input type="hidden" name="article[author_ids][]" value="${id}">`;
+      <input type="hidden" name="${inputName}" value="${id}">`;
     // Encontra o container correto das tags existentes
     const container = this.inputTarget.closest('.flex.flex-col').querySelector('.flex.flex-wrap');
     if (container) {

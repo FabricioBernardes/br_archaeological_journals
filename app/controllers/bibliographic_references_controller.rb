@@ -30,7 +30,8 @@ class BibliographicReferencesController < ApplicationController
   # POST /bibliographic_references or /bibliographic_references.json
   def create
     @bibliographic_reference = BibliographicReference.new(bibliographic_reference_params)
-
+    # Associa os autores se vierem author_ref_ids
+    @bibliographic_reference.author_ref_ids = params[:bibliographic_reference][:author_ref_ids] if params[:bibliographic_reference][:author_ref_ids].present?
     respond_to do |format|
       if @bibliographic_reference.save
         format.html { redirect_to @bibliographic_reference, notice: "Bibliographic reference was successfully created." }
@@ -74,6 +75,6 @@ class BibliographicReferencesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def bibliographic_reference_params
-    params.require(:bibliographic_reference).permit(:reference_type, :year, :title, :publisher, :publication_location, :doi, :language)
+    params.require(:bibliographic_reference).permit(:reference_type, :year, :title, :publisher, :publication_location, :doi, :language, author_ref_ids: [])
   end
 end

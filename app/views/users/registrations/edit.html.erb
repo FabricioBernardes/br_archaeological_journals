@@ -38,6 +38,18 @@
     </div>
   <% end %>
 
+  <% if current_user&.admin? && resource != current_user %>
+    <div class="mt-4">
+      <%= link_to 'Alterar permissão deste usuário', edit_role_user_path(resource), class: 'w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
+    </div>
+  <% end %>
+
+  <% if current_user&.admin? %>
+    <div class="mb-4">
+      <%= link_to 'Gerenciar permissões dos usuários', users_path, class: 'w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
+    </div>
+  <% end %>
+
   <h3 class="text-lg font-bold mt-6">Cancel my account</h3>
 
   <div class="text-sm text-stone-500 mb-4">

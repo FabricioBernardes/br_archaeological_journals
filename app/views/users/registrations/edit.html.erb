@@ -5,8 +5,8 @@
     <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field">
-      <%= f.label :email, class: "block text-sm font-medium text-stone-700" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "bg-white h-8 mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+      <%= f.label :email, class: "block text-sm font-medium text-stone-700" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "bg-stone-100 px-2 h-8 mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -15,23 +15,22 @@
 
     <div class="field">
       <%= f.label :password, class: "block text-sm font-medium text-stone-700" %> 
-      <i class="text-sm text-stone-500">(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "new-password", class: "bg-white h-8 mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+      <i class="text-sm text-stone-500">(leave blank if you don't want to change it)</i>
+      <%= f.password_field :password, autocomplete: "new-password", class: "bg-stone-100 px-2 h-8 mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
       <% if @minimum_password_length %>
-        <br />
         <em class="text-sm text-stone-500"><%= @minimum_password_length %> characters minimum</em>
       <% end %>
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation, class: "block text-sm font-medium text-stone-700" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "bg-white h-8 mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+      <%= f.label :password_confirmation, class: "block text-sm font-medium text-stone-700" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "bg-stone-100 px-2 h-8 mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
     </div>
 
     <div class="field">
       <%= f.label :current_password, class: "block text-sm font-medium text-stone-700" %> 
-      <i class="text-sm text-stone-500">(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "current-password", class: "bg-white h-8 mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+      <i class="text-sm text-stone-500">(we need your current password to confirm your changes)</i>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "bg-stone-100 px-2 h-8 mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
     </div>
 
     <div class="actions">

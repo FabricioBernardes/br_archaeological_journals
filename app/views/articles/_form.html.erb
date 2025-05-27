@@ -186,8 +186,23 @@
     <div class="flex flex-col gap-2 mb-2" data-controller="bibliographic-references">
       <div class="flex flex-wrap gap-2 mb-2">
         <% @article.bibliographic_references.each do |reference| %>
-          <span class="flex bg-stone-100 text-black px-2 py-1 rounded" data-bibliographic-references-target="referenceTag" data-bibliographic-references-index="<%= reference.id %>">
-            <span><%= reference.title %> (<%= reference.year %>)</span>
+          <span class="flex bg-stone-100 text-black px-2 py-1 rounded items-center w-full py-2" data-bibliographic-references-target="referenceTag" data-bibliographic-references-index="<%= reference.id %>">
+            <ul class="list-disc ml-6">
+              <li>
+                <% if reference.author_refs.any? %>
+                  <span>(
+                    <%= reference.author_refs.map(&:name).to_sentence(last_word_connector: ', ', two_words_connector: ', ') %>
+                  )</span>
+                <% end %>
+                <strong><%= reference.title %>.</strong>
+                <%= reference.publication_location.presence ? reference.publication_location + ": " : "" %>
+                <%= reference.publisher.presence ? reference.publisher + ", " : "" %>
+                <%= reference.year.presence ? reference.year.to_s + "." : "" %>
+                <% if reference.doi.present? %>
+                  DOI: <%= reference.doi %>.
+                <% end %>
+              </li>
+            </ul>
             <button
               type="button"
               class="ml-2 text-red-500 hover:text-red-700 font-bold cursor-pointer self-end"
@@ -219,14 +234,13 @@
         <p class="mb-2">Cadastrar nova referência</p>
         <div class="grid grid-cols-1 items-end md:grid-cols-2 gap-2">
           <div>
-            <label class="block mb-1">Autores da referência</label>
             <div class="flex flex-col gap-2" data-controller="authors" data-authors-context="bibliographic-reference">
-              <div class="flex flex-wrap gap-2 mb-2"></div>
+              <div class="flex flex-col gap-2 mb-2"></div>
               <div class="flex items-center">
                 <input
                   type="text"
                   name="new_bibliographic_reference[author_refs_search]"
-                  placeholder="Adicionar autor da referência"
+                  placeholder="Adicionar autor"
                   class="border rounded px-2 py-1 w-full h-10"
                   data-action="input->authors#autocomplete keydown->authors#handleKeydown"
                   data-authors-target="input"

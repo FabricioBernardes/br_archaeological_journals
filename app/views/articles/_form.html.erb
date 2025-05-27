@@ -217,33 +217,33 @@
       </div>
       <div class="border rounded p-3 bg-stone-50 mt-2">
         <p class="mb-2">Cadastrar nova referência</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <input type="text" name="new_bibliographic_reference[title]" placeholder="Título" class="border rounded px-2 py-1 w-full" />
-          <input type="number" name="new_bibliographic_reference[year]" placeholder="Ano" class="border rounded px-2 py-1 w-full" />
-          <input type="text" name="new_bibliographic_reference[publisher]" placeholder="Editora" class="border rounded px-2 py-1 w-full" />
-          <input type="text" name="new_bibliographic_reference[publication_location]" placeholder="Local de publicação" class="border rounded px-2 py-1 w-full" />
-          <input type="text" name="new_bibliographic_reference[doi]" placeholder="DOI" class="border rounded px-2 py-1 w-full" />
-          <input type="text" name="new_bibliographic_reference[language]" placeholder="Idioma" class="border rounded px-2 py-1 w-full" />
-          <input type="text" name="new_bibliographic_reference[reference_type]" placeholder="Tipo de referência" class="border rounded px-2 py-1 w-full" />
-          <div class="col-span-1 md:col-span-2">
+        <div class="grid grid-cols-1 items-end md:grid-cols-2 gap-2">
+          <div>
             <label class="block mb-1">Autores da referência</label>
-            <div class="flex flex-col gap-2 mb-2" data-controller="authors" data-authors-context="bibliographic-reference">
+            <div class="flex flex-col gap-2" data-controller="authors" data-authors-context="bibliographic-reference">
               <div class="flex flex-wrap gap-2 mb-2"></div>
-              <div>
+              <div class="flex items-center">
                 <input
                   type="text"
                   name="new_bibliographic_reference[author_refs_search]"
                   placeholder="Adicionar autor da referência"
-                  class="border rounded px-2 py-1 w-48"
+                  class="border rounded px-2 py-1 w-full h-10"
                   data-action="input->authors#autocomplete keydown->authors#handleKeydown"
                   data-authors-target="input"
                   autocomplete="off"
                 />
                 <ul class="absolute bg-white border rounded shadow mt-1 z-10 w-48 hidden" data-authors-target="suggestions"></ul>
-                <button type="button" class="ml-2 bg-blue-500 text-white px-2 py-1 rounded">Adicionar</button>
+                <button type="button" class="ml-2 bg-blue-500 text-white px-2 py-1 h-10 rounded">Adicionar</button>
               </div>
             </div>
           </div>
+          <input type="text" name="new_bibliographic_reference[title]" placeholder="Título" class="border rounded px-2 py-1 w-full h-10" />
+          <input type="number" name="new_bibliographic_reference[year]" placeholder="Ano" class="border rounded px-2 py-1 w-full h-10" />
+          <input type="text" name="new_bibliographic_reference[publisher]" placeholder="Editora" class="border rounded px-2 py-1 w-full h-10" />
+          <input type="text" name="new_bibliographic_reference[publication_location]" placeholder="Local de publicação" class="border rounded px-2 py-1 w-full h-10" />
+          <input type="text" name="new_bibliographic_reference[doi]" placeholder="DOI" class="border rounded px-2 py-1 w-full h-10" />
+          <input type="text" name="new_bibliographic_reference[language]" placeholder="Idioma" class="border rounded px-2 py-1 w-full h-10" />
+          <input type="text" name="new_bibliographic_reference[reference_type]" placeholder="Tipo de referência" class="border rounded px-2 py-1 w-full h-10" />
         </div>
         <button type="button" class="mt-2 bg-green-600 text-white px-3 py-1 rounded" data-action="click->bibliographic-references#addNewReference">Cadastrar nova referência</button>
       </div>

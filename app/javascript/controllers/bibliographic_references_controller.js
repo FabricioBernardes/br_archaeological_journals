@@ -166,7 +166,7 @@ export default class extends Controller {
         newRef[key] = input.value.trim();
       }
     });
-    // Coleta os IDs dos autores selecionados
+    // Coleta os IDs dos autores selecionados (AuthorRef)
     const authorIds = Array.from(formWrapper.querySelectorAll('input[name="new_bibliographic_reference[author_ref_ids][]"]')).map(i => i.value);
     if (authorIds.length > 0) {
       newRef.author_ref_ids = authorIds;

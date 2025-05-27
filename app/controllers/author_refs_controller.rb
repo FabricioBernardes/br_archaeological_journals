@@ -1,10 +1,10 @@
 class AuthorRefsController < ApplicationController
   def index
-    if params[:query].present?
-      @author_refs = AuthorRef.where("name ILIKE ?", "%#{params[:query]}%")
-    else
-      author_refs = AuthorRef.all
-    end
+    author_refs = if params[:query].present?
+                    AuthorRef.where("name ILIKE ?", "%#{params[:query]}%")
+                  else
+                    AuthorRef.all
+                  end
     respond_to do |format|
       format.json { render json: author_refs.select(:id, :name) }
     end

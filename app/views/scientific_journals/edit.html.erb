@@ -13,7 +13,11 @@
     </div>
 
     <div class="mb-6">
-      <%= render "form", scientific_journal: @scientific_journal %>
+      <% if user_signed_in? && (current_user.contributor? || current_user.admin?) %>
+        <%= render "form", scientific_journal: @scientific_journal %>
+      <% else %>
+        <div class="text-center text-red-500 font-bold my-10">Você não tem permissão para editar esta revista.</div>
+      <% end %>
     </div>
 
     <div class="flex flex-col sm:flex-row gap-2">

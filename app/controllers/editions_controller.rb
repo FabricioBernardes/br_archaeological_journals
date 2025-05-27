@@ -1,5 +1,7 @@
 class EditionsController < ApplicationController
   before_action :set_edition, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :require_contributor_or_admin, only: %i[new create edit update destroy]
 
   # GET /editions or /editions.json
   def index
@@ -70,5 +72,11 @@ class EditionsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def edition_params
     params.require(:edition).permit(:volume, :publication_date, :editors, :theme, :edition_type, :access_url, :doi, :available_format, :scientific_journal_id)
+  end
+
+  def require_contributor_or_admin
+    return if current_user&.contributor? || current_user&.admin?
+
+    redirect_to editions_path, alert: 'Você não tem permissão para realizar esta ação.'
   end
 end

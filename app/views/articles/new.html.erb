@@ -16,7 +16,12 @@
       <div class="flex items-center gap-2 mb-5">
         <h1 class="font-bold text-4xl">Criar artigo</h1>
       </div>
-      <%= render "form", article: @article, edition_id: params.dig(:article, :edition_id) %>
+
+      <% if user_signed_in? && (current_user.contributor? || current_user.admin?) %>
+        <%= render "form", article: @article, edition_id: params.dig(:article, :edition_id) %>
+      <% else %>
+        <div class="text-center text-red-500 font-bold my-10">Você não tem permissão para criar um novo artigo.</div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -53,8 +53,10 @@
   </div>
 
   <div class="w-full grid grid-cols-3 gap-4 mt-5 mb-12">
-    <%= link_to "Editar dados da edição", edit_edition_path(@edition), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
-    <%= button_to "Remover edição", @edition, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+    <% if user_signed_in? && (current_user.contributor? || current_user.admin?) %>
+      <%= link_to "Editar dados da edição", edit_edition_path(@edition), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
+      <%= button_to "Remover edição", @edition, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+    <% end %>
   </div>
 
   <div class="w-full flex flex-col gap-2 mb-4">
@@ -74,7 +76,9 @@
         <li class="block py-2.5 mb-5 font-semibold">Nenhum artigo encontrado.</li>
       <% end %>
       <li>
-        <%= link_to "Adicionar novo artigo", new_article_path(article: { edition_id: @edition.id }), class: "flex w-fit px-3.5 py-2.5 border-b mb-5 font-semibold" %>
+        <% if user_signed_in? && (current_user.contributor? || current_user.admin?) %>
+          <%= link_to "Adicionar novo artigo", new_article_path(article: { edition_id: @edition.id }), class: "flex w-fit px-3.5 py-2.5 border-b mb-5 font-semibold" %>
+        <% end %>
       </li>
     </ul>
   </div>

@@ -15,7 +15,11 @@
     </ul>
   </div>
 
-  <%= render "form", article: @article, keywords: @keywords, edition_id: params.dig(:article, :edition_id) %>
+  <% if user_signed_in? && (current_user.contributor? || current_user.admin?) %>
+    <%= render "form", article: @article, keywords: @keywords, edition_id: params.dig(:article, :edition_id) %>
+  <% else %>
+    <div class="text-center text-red-500 font-bold my-10">Você não tem permissão para editar este artigo.</div>
+  <% end %>
 
   <%= link_to "Show this article", @article, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
 </div>

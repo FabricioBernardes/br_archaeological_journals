@@ -1,5 +1,7 @@
 class ScientificJournalsController < ApplicationController
   before_action :set_scientific_journal, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :require_contributor_or_admin, only: %i[new create edit update destroy]
 
   # GET /scientific_journals or /scientific_journals.json
   def index
@@ -61,6 +63,12 @@ class ScientificJournalsController < ApplicationController
   end
 
   private
+
+  def require_contributor_or_admin
+    return if current_user&.contributor? || current_user&.admin?
+
+    redirect_to scientific_journals_path, alert: 'Você não tem permissão para realizar esta ação.'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_scientific_journal

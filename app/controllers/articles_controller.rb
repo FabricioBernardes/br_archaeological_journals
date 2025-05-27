@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :require_contributor_or_admin, only: %i[new create edit update destroy]
 
   # GET /articles or /articles.json
   def index
@@ -64,6 +66,12 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def require_contributor_or_admin
+    return if current_user&.contributor? || current_user&.admin?
+
+    redirect_to articles_path, alert: 'Você não tem permissão para realizar esta ação.'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_article

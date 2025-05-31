@@ -74,3 +74,5 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "dockerfile-rails", ">= 1.7", group: :development

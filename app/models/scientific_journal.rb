@@ -11,4 +11,8 @@
 
 class ScientificJournal < ApplicationRecord
   has_many :editions, dependent: :destroy
+
+  def articles_count
+    Article.joins(:edition).where(editions: { scientific_journal_id: id }).count
+  end
 end

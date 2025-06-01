@@ -53,5 +53,47 @@
         Assim que houver informação suficiente, serão disponibilizados gráficos ilustrando o progresso do trabalho. Acompanhe as atualizações e sinta-se à vontade para contribuir futuramente com dados ou análises.
       </p>
     </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold text-stone-800 mb-2">Top 10 autores com mais artigos</h2>
+      <div class="w-full max-w-2xl mx-auto">
+        <canvas id="top-authors-chart" height="200"></canvas>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+      <script>
+        function renderTopAuthorsChart() {
+          var ctx = document.getElementById('top-authors-chart').getContext('2d');
+          var data = {
+            labels: <%= raw @top_authors.map { |a| a.name.inspect }.to_json %>,
+            datasets: [{
+              label: 'Quantidade de artigos',
+              data: <%= raw @top_authors.map { |a| a.articles_count }.to_json %>,
+              backgroundColor: 'rgba(59, 130, 246, 0.7)',
+              borderColor: 'rgba(59, 130, 246, 1)',
+              borderWidth: 1
+            }]
+          };
+          new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                title: { display: false }
+              },
+              scales: {
+                y: { beginAtZero: true, precision: 0 }
+              }
+            }
+          });
+        }
+        if (window.Turbo) {
+          document.addEventListener('turbo:load', renderTopAuthorsChart);
+        } else {
+          document.addEventListener('DOMContentLoaded', renderTopAuthorsChart);
+        }
+      </script>
+    </section>
   </div>
 </div>

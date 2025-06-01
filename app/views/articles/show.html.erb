@@ -10,8 +10,6 @@
       <li class="text-stone-500"><%= link_to @article.edition.scientific_journal.name, scientific_journal_path(@article.edition.scientific_journal) %></li>
       <li>/</li>
       <li class="text-stone-500"><%= link_to "Volume #{@article.edition.volume}", edition_path(@article.edition) %></li>
-      <li>/</li>
-      <li class="font-semibold"><%= @article.title %></li>
     </ul>
   </div>
 

@@ -1,9 +1,11 @@
 class AuthorsController < ApplicationController
-  before_action :set_author, only: %i[ show edit update destroy ]
+  include Pagy::Backend
+
+  before_action :set_author, only: %i[show edit update destroy]
 
   # GET /authors or /authors.json
   def index
-    @authors = Author.all
+    @pagy, @authors = pagy(Author.order(:name), items: 20)
   end
 
   # GET /authors/1 or /authors/1.json
@@ -58,13 +60,14 @@ class AuthorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_author
-      @author = Author.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def author_params
-      params.require(:author).permit(:name, :country_of_origin, :institutional_affiliation, :specialization_area, :academic_background)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_author
+    @author = Author.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def author_params
+    params.require(:author).permit(:name, :country_of_origin, :institutional_affiliation, :specialization_area, :academic_background)
+  end
 end

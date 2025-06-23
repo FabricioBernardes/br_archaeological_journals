@@ -31,17 +31,27 @@
     </div>
 
     <div class="mb-10">
+      <h2 class="text-2xl font-semibold text-stone-800 mb-2">Produção por ano</h2>
+      <div class="w-full max-w-2xl mr-auto mt-4">
+        <canvas id="author-publications-chart" class="!w-full"></canvas>
+      </div>
+    </div>
+
+    <div class="mb-10">
       <h2 class="text-2xl font-semibold text-stone-800 mb-2">Publicações deste autor</h2>
-      <% if @author.articles.any? %>
+      <% per_page = 10 %>
+      <% page = (params[:artigos_page] || 1).to_i %>
+      <% sorted_articles =
+        begin
+          articles = @author.articles.includes(:edition)
+          articles.sort_by { |a| [-(a.edition&.publication_date&.year || 0), a.title.to_s] }
+        end
+      %>
+      <% total_pages = (sorted_articles.size / per_page.to_f).ceil %>
+      <% paginated_articles = sorted_articles.slice((page - 1) * per_page, per_page) || [] %>
+      <% if paginated_articles.any? %>
         <ul class="divide-y divide-stone-200">
-          <% sorted_articles =
-            begin
-              # Ordena por ano da edição (desc) e título (asc)
-              articles = @author.articles.includes(:edition)
-              articles.sort_by { |a| [-(a.edition&.publication_date&.year || 0), a.title.to_s] }
-            end
-          %>
-          <% sorted_articles.each do |article| %>
+          <% paginated_articles.each do |article| %>
             <li class="py-3">
               <a href="<%= article_path(article) %>" class="font-medium text-blue-700 hover:underline"><%= article.title %></a>
               <span class="ml-2 text-stone-500 text-sm">
@@ -50,71 +60,82 @@
             </li>
           <% end %>
         </ul>
+        <div class="flex gap-2 mt-4 justify-center">
+          <% if page > 1 %>
+            <%= link_to 'Anterior', url_for(params.permit!.merge(artigos_page: page - 1)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200' %>
+          <% end %>
+          <% (1..total_pages).each do |p| %>
+            <% if p == page %>
+              <span class="px-3 py-1 rounded bg-blue-600 text-white font-bold"><%= p %></span>
+            <% else %>
+              <%= link_to p, url_for(params.permit!.merge(artigos_page: p)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200' %>
+            <% end %>
+          <% end %>
+          <% if page < total_pages %>
+            <%= link_to 'Próxima', url_for(params.permit!.merge(artigos_page: page + 1)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200' %>
+          <% end %>
+        </div>
       <% else %>
         <p class="text-stone-500">Nenhuma publicação encontrada.</p>
       <% end %>
     </div>
 
-    <div class="mb-10">
-      <h2 class="text-2xl font-semibold text-stone-800 mb-2">Produção por ano</h2>
-      <div class="w-full max-w-2xl mr-auto mt-4">
-        <canvas id="author-publications-chart" class="!w-full"></canvas>
+    <% if current_user&.admin? || current_user&.contributor? %>
+      <div class="flex flex-wrap gap-2 mt-8">
+        <%= link_to "Editar autor", edit_author_path(@author), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
+        <%= link_to "Voltar para autores", authors_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
+        <%= button_to "Remover autor", @author, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Tem certeza?" } %>
       </div>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-      <script>
-        function renderAuthorPublicationsChart() {
-          var dataByYear = {};
-          <% # Agrupa publicações por ano da edição %>
-          <% articles_by_year = Hash.new { |h, k| h[k] = [] } %>
-          <% @author.articles.includes(:edition).each do |article| %>
-            <% year = article.edition&.publication_date&.year %>
-            <% if year.present? %>
-              <% articles_by_year[year] << article %>
-            <% end %>
-          <% end %>
-          <% articles_by_year.keys.sort.each do |year| %>
-            dataByYear["<%= year %>"] = <%= articles_by_year[year].size %>;
-          <% end %>
-          var labels = Object.keys(dataByYear);
-          var data = labels.map(function(year) { return dataByYear[year]; });
-          var ctx = document.getElementById('author-publications-chart').getContext('2d');
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: labels,
-              datasets: [{
-                label: 'Publicações por ano',
-                data: data,
-                backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                borderColor: 'rgba(59, 130, 246, 1)',
-                borderWidth: 1
-              }]
-            },
-            options: {
-              responsive: true,
-              plugins: {
-                legend: { display: false },
-                title: { display: false },
-              },
-              scales: {
-                y: { beginAtZero: true, precision: 0 },
-                x: { grid: { display: false } }
-              },
-            }
-          });
-        }
-        if (window.Turbo) {
-          document.addEventListener('turbo:load', renderAuthorPublicationsChart);
-        } else {
-          document.addEventListener('DOMContentLoaded', renderAuthorPublicationsChart);
-        }
-      </script>
-    </div>
-
-    <div class="flex flex-wrap gap-2 mt-8">
-      <%= link_to "Editar autor", edit_author_path(@author), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
-      <%= link_to "Voltar para autores", authors_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-stone-100 hover:bg-stone-50 inline-block font-medium" %>
-      <%= button_to "Remover autor", @author, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Tem certeza?" } %>
-    </div>
+    <% end %>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+  function renderAuthorPublicationsChart() {
+    var dataByYear = {};
+    <% # Agrupa publicações por ano da edição %>
+    <% articles_by_year = Hash.new { |h, k| h[k] = [] } %>
+    <% @author.articles.includes(:edition).each do |article| %>
+      <% year = article.edition&.publication_date&.year %>
+      <% if year.present? %>
+        <% articles_by_year[year] << article %>
+      <% end %>
+    <% end %>
+    <% articles_by_year.keys.sort.each do |year| %>
+      dataByYear["<%= year %>"] = <%= articles_by_year[year].size %>;
+    <% end %>
+    var labels = Object.keys(dataByYear);
+    var data = labels.map(function(year) { return dataByYear[year]; });
+    var ctx = document.getElementById('author-publications-chart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Publicações por ano',
+          data: data,
+          backgroundColor: 'rgba(59, 130, 246, 0.7)',
+          borderColor: 'rgba(59, 130, 246, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: false },
+        },
+        scales: {
+          y: { beginAtZero: true, precision: 0 },
+          x: { grid: { display: false } }
+        },
+      }
+    });
+  }
+  if (window.Turbo) {
+    document.addEventListener('turbo:load', renderAuthorPublicationsChart);
+  } else {
+    document.addEventListener('DOMContentLoaded', renderAuthorPublicationsChart);
+  }
+</script>

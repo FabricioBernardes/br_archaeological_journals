@@ -56,8 +56,8 @@
 
     <section class="mb-8">
       <h2 class="text-2xl font-semibold text-stone-800 mb-2">Top 10 autores com mais artigos</h2>
-      <div class="w-full max-w-2xl mx-auto">
-        <canvas id="top-authors-chart" height="200"></canvas>
+      <div class="w-full max-w-2xl mr-auto mt-4">
+        <canvas id="top-authors-chart" class="!w-full"></canvas>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
       <script>
@@ -80,11 +80,14 @@
               responsive: true,
               plugins: {
                 legend: { display: false },
-                title: { display: false }
+                title: { display: false },
               },
               scales: {
-                y: { beginAtZero: true, precision: 0 }
-              }
+                y: { beginAtZero: true, precision: 0 },
+                x: {
+                  grid: { display: false },
+                }
+              },
             }
           });
         }

@@ -72,7 +72,7 @@
             <% end %>
           <% end %>
           <% if page < total_pages %>
-            <%= link_to 'Próxima', url_for(params.permit!.merge(artigos_page: page + 1)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200' %>
+            <%= link_to 'Próximo', url_for(params.permit!.merge(artigos_page: page + 1)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200' %>
           <% end %>
         </div>
       <% else %>

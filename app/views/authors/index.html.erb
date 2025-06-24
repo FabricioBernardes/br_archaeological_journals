@@ -39,18 +39,26 @@
   </div>
 
   <div class="mt-6 flex justify-center">
-    <% if defined?(@pagy) %>
+    <% if defined?(@pagy) && @pagy.pages > 1 %>
+      <% current_page = @pagy.page %>
+      <% total_pages = @pagy.pages %>
+      <% window_size = 4 %>
+      <% start_page = [current_page - (window_size/2).floor, 1].max %>
+      <% end_page = [start_page + window_size - 1, total_pages].min %>
+      <% start_page = [end_page - window_size + 1, 1].max %>
       <nav class="inline-flex gap-1" aria-label="Paginação">
-        <% pagy_nav(@pagy).scan(/<a[^>]*>.*?<\/a>|<span[^>]*>.*?<\/span>/).each do |el| %>
-          <% if el.include?('pagy-nav-page') && el.include?('active') %>
-            <span class="px-3 py-1 rounded bg-blue-600 text-white font-bold"> <%= raw el.gsub(/<.*?>/, '') %> </span>
-          <% elsif el.include?('pagy-nav-page') %>
-            <%= raw el.gsub('pagy-nav-page', 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700') %>
-          <% elsif el.include?('pagy-nav-prev') || el.include?('pagy-nav-next') %>
-            <%= raw el.gsub('pagy-nav-', '').gsub('prev', 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700').gsub('next', 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700') %>
+        <% if current_page > 1 %>
+          <%= link_to 'Anterior', url_for(params.permit!.merge(page: current_page - 1)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700' %>
+        <% end %>
+        <% (start_page..end_page).each do |p| %>
+          <% if p == current_page %>
+            <span class="px-3 py-1 rounded bg-blue-600 text-white font-bold"><%= p %></span>
           <% else %>
-            <%= raw el %>
+            <%= link_to p, url_for(params.permit!.merge(page: p)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700' %>
           <% end %>
+        <% end %>
+        <% if current_page < total_pages %>
+          <%= link_to 'Próximo', url_for(params.permit!.merge(page: current_page + 1)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700' %>
         <% end %>
       </nav>
     <% end %>

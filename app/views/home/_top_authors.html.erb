@@ -4,8 +4,15 @@
     <canvas id="top-authors-chart" class="!w-full"></canvas>
   </div>
   <script>
+    var topAuthorsChartInstance;
     function renderTopAuthorsChart() {
-      var ctx = document.getElementById('top-authors-chart').getContext('2d');
+      var canvas = document.getElementById('top-authors-chart');
+      if (!canvas) return;
+      // Destroy previous chart instance if it exists
+      if (window.topAuthorsChartInstance) {
+        window.topAuthorsChartInstance.destroy();
+      }
+      var ctx = canvas.getContext('2d');
       var authorIds = <%= raw @top_authors.map { |a| a.id }.to_json %>;
       var data = {
         labels: <%= raw @top_authors.map { |a| a.name.inspect }.to_json %>,
@@ -17,7 +24,7 @@
           borderWidth: 1
         }]
       };
-      var chart = new Chart(ctx, {
+      window.topAuthorsChartInstance = new Chart(ctx, {
         type: 'bar',
         data: data,
         options: {

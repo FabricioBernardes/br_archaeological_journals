@@ -33,7 +33,9 @@
         </div>
         <div>
           <strong class="block font-medium mb-1">URL do site:</strong>
-          <%= @scientific_journal.website_url %>
+          <a href="<%= @scientific_journal.website_url %>" target="_blank" rel="noopener noreferrer">
+            <%= truncate(@scientific_journal.website_url, length: 40, omission: " ...") %>
+          </a>
         </div>
         <div>
           <strong class="block font-medium mb-1">Periodicidade:</strong>

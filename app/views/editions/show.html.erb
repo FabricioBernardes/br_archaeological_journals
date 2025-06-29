@@ -36,7 +36,9 @@
     </div>
     <div>
       <strong class="block font-medium mb-1">Access url:</strong>
-      <%= @edition.url %>
+      <a href="<%= @edition.url %>" target="_blank" rel="noopener noreferrer">
+        <%= truncate(@edition.url, length: 40, omission: " ...") %>
+      </a>
     </div>
     <div>
       <strong class="block font-medium mb-1">Doi:</strong>

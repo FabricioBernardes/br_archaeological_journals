@@ -19,23 +19,25 @@
   </div>
   <div>
     <strong class="block font-medium mb-1">Palavras-chave:</strong>
-    <% article.keywords.each do |article| %>
-      <span class="inline-block bg-stone-200 text-stone-700 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded">
-        <%= article.name %>
-      </span>
-    <% end %>
+    <div class="flex flex-wrap gap-2">
+      <% article.keywords.each do |article| %>
+        <span class="inline-block bg-stone-200 text-stone-700 text-sm font-semibold px-2.5 py-0.5 rounded">
+          <%= article.name %>
+        </span>
+      <% end %>
+    </div>
   </div>
-  <div class="grid grid-cols-2 gap-4 my-8 border-b pb-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8 border-b pb-4">
     <div>
       <strong class="block font-medium mb-1">DOI:</strong>
       <a href="<%= article.doi %>" target="_blank" rel="noopener noreferrer">
-        <%= truncate(article.doi, length: 60, omission: " ...") %>
+        <%= truncate(article.doi, length: 40, omission: " ...") %>
       </a>
     </div>
     <div>
       <strong class="block font-medium mb-1">URL do artigo:</strong>
       <a href="<%= article.article_url %>" target="_blank" rel="noopener noreferrer">
-        <%= truncate(article.article_url, length: 60, omission: " ...") %>
+        <%= truncate(article.article_url, length: 40, omission: " ...") %>
       </a>
     </div>
     <div>

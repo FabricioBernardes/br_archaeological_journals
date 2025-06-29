@@ -11,8 +11,14 @@ class ScientificJournalsController < ApplicationController
   # GET /scientific_journals/1 or /scientific_journals/1.json
   def show
     @scientific_journal = ScientificJournal.find(params[:id])
-    @editions = @scientific_journal.editions
-    @scientific_journal.editions.build if @editions.empty?
+    per_page = 10
+    page = (params[:edicoes_page] || 1).to_i
+    editions = @scientific_journal.editions.order(publication_date: :desc, volume: :desc)
+    total_pages = (editions.size / per_page.to_f).ceil
+    @paginated_editions = editions.offset((page - 1) * per_page).limit(per_page)
+    @editions_total_pages = total_pages
+    @editions_current_page = page
+    @scientific_journal.editions.build if editions.empty?
   end
 
   # GET /scientific_journals/new

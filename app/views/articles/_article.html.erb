@@ -4,8 +4,13 @@
   </div>
   <div>
     <strong class="block font-medium mb-1">Autores:</strong>
-    <div class="flex flex-wrap gap-2">
-      <%= article.authors.map { |author| author.name }.to_sentence(last_word_connector: ', ', two_words_connector: ', ') %>
+    <div class="flex flex-wrap">
+      <% article.authors.each_with_index do |author, idx| %>
+        <%= link_to(author.name, author_path(author), class: "text-blue-600 hover:underline") %>
+        <% if idx < article.authors.size - 1 %>
+          <span class="text-gray-500 mr-2">,</span>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <div>

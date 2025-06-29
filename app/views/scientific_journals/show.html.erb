@@ -93,7 +93,12 @@
           <% if @editions_current_page > 1 %>
             <%= link_to 'Anterior', url_for(params.permit!.merge(edicoes_page: @editions_current_page - 1)), class: 'px-3 py-1 rounded bg-stone-100 hover:bg-stone-200' %>
           <% end %>
-          <% (1..@editions_total_pages).each do |p| %>
+          <% 
+            start_page = [@editions_current_page - 1, 1].max
+            end_page = [start_page + 2, @editions_total_pages].min
+            start_page = [end_page - 2, 1].max
+          %>
+          <% (start_page..end_page).each do |p| %>
             <% if p == @editions_current_page %>
               <span class="px-3 py-1 rounded bg-blue-600 text-white font-bold"><%= p %></span>
             <% else %>

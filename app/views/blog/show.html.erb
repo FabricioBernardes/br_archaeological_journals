@@ -1,0 +1,8 @@
+<% if params[:id].to_s == "1" %>
+  <%= render partial: "post_1" %>
+<% elsif params[:id].to_s == "2" %>
+  <%= render partial: "post_2" %>
+<% else %>
+  <h1>Post não encontrado</h1>
+  <a href="<%= blog_path %>">← Voltar para o blog</a>
+<% end %>

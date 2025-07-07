@@ -1,0 +1,54 @@
+<div class="min-h-[60vh] w-full container mx-auto px-4 py-8 bg-white rounded-lg shadow-sm">
+
+  <div class="mx-auto max-w-4xl">
+    <h1 class="text-3xl font-bold">Abertura dos trabalhos</h1>
+    <h2 class="text-xl font-semibold mb-4">Motivação, estrutura, conteúdo e objetivos</h2>
+    <p>Fabrício Bernardes</p>
+    <small class="text-stone-500">Publicado em 07/07/2025</small>
+  </div>
+
+  <article class="mt-6 text-stone-700 space-y-4 mx-auto max-w-4xl">
+    <p>
+      O projeto pretende reunir um conjunto diverso de dados sobre as publicações de arqueologia brasileiras, incluindo referências bibliográficas,
+      tipos de analise utilizadas, recortes temáticos, etc.
+    </p>
+    
+    <p>
+      A produção destes dados, em grande parte precisará ser feita a partir da consulta
+      individual de cada texto, o que demandará tempo e um trabalho coordenado. Por este motivo optou-se por iniciar este processo a partir de dados
+      de carater mais fundamental e que podem ser obtidos a partir das páginas web das publicações.
+    </p>
+
+    <p>
+      Neste sentido, foi selecionada uma amostra inicial de revistas, delimitada por revistas de arqueologia que obtiveram nota Qualis igual ou superior a B2
+      na <a class="underline" href="https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/avaliacao/avaliacao-quadrienal/avaliacao-quadrienal-2017-2020/metodologia-do-qualis-referencia-quadrienio-2017-2020">
+      avaliação quadrienal (2017-2020) da Capes</a>. Dentro deste recorte foram selecionadas todas as publicações disponiveis online.
+    </p>
+
+    <p>
+      Nesta primeira etapa o Boletim do Museu Paraense Emílio Goeldi precisou ficar de fora devido as constantes instabilidades do site onde a revista está hospedada.
+    </p>
+
+    <p>
+      Os dados foram produzidos de maneira automatizada, a partir da técnica de <a class="underline" href="https://pt.wikipedia.org/wiki/Web_scraping">web scraping</a>.
+      Os scripts utilizados para gerar os dados estão disponíveis <a class="underline" href="https://github.com/FabricioBernardes/scraping_journals">neste repositório do GitHub</a>.
+      Caso alguém tenha interesse em reproduzir o processo, o README do projeto contém as instruções necessárias para executar os scripts.
+    </p>
+
+    <p>
+      Esta primeira etapa já está concluída e os dados já constam no sistema. Com isso, já se tem os registros-base de 3.770 artigos,
+      que formam uma amostra bem delimitada e servirão de base para o cadastro de informações mais detalhadas.
+    </p>
+
+    <p>
+      Caso queira colaborar com o projeto, seja na produção dos dados ou no desenvolvimento do sistema,
+      entre em contato por e-mail: <a href="mailto:fbernardes.dev@gmail.com">fbernardes.dev@gmail.com</a>
+    </p>
+
+    <p>
+      O código-fonte do projeto pode ser acessado em <a class="underline" href="https://github.com/FabricioBernardes/br_archaeological_journals">neste repositório do GitHub</a>.
+    </p>
+  </article>
+
+  <a href="<%= blog_path %>" class="mt-8 inline-block text-blue-700 hover:underline">← Voltar para o blog</a>
+</div>

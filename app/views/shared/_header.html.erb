@@ -7,18 +7,22 @@
       <a href="/scientific_journals" class="ml-4 text-stone-500 hover:text-stone-300 font-semibold sm:block hidden">Revistas cientificas</a>
     </div>
 
-    <div class="flex gap-4 items-center">
+    <div class="gap-4 items-center hidden sm:flex">
       <% if user_signed_in? %>
-        <p class="text-stone-400 sm:block hidden"><%= current_user.email %></p>
+        <p class="text-stone-400"><%= current_user.email %></p>
       <% end %>
       <div class="flex gap-2">
         <% if user_signed_in? %>
-          <%= link_to 'Edit Profile', edit_user_registration_path, class: "text-stone-500 hover:text-stone-300 hidden sm:inline" %>
+          <%= link_to 'Edit Profile', edit_user_registration_path, class: "text-stone-500 hover:text-stone-300" %>
           <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "text-stone-500 hover:text-stone-300" %>
         <% else %>
           <%= link_to 'Login', new_user_session_path, class: "text-stone-500 hover:text-stone-300" %>
         <% end %>
       </div>
+    </div>
+
+    <div class="sm:hidden flex items-center">
+      <%= render 'shared/header/menu_mobile'%>
     </div>
   </div>
 </header>

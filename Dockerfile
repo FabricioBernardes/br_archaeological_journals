@@ -46,7 +46,7 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-RUN PGDATABASE=dummy PGUSER=dummy PGPASSWORD=dummy PGHOST=localhost ./bin/rails assets:precompile
+RUN SECRET_KEY_BASE=dummy PGDATABASE=dummy PGUSER=dummy PGPASSWORD=dummy PGHOST=localhost ./bin/rails assets:precompile
 
 
 # Final stage for app image

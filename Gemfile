@@ -77,4 +77,6 @@ gem "devise", "~> 4.9"
 
 gem "dockerfile-rails", ">= 1.7", group: :development
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 gem 'pagy'

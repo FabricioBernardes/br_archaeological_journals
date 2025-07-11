@@ -9,24 +9,72 @@
 
   <article class="mt-6 text-stone-700 space-y-4 mx-auto max-w-4xl">
     <p>
-      O projeto Bibliometria Arqueológica pretende reunir um conjunto diverso de dados sobre artigos científicos de arqueologia publicados
-      no Brasil, incluindo referências bibliográficas, tipos de análise utilizadas, recortes temáticos, entre outros.
-    </p>
-    
-    <p>
-      A produção destes dados, em grande parte, precisará ser feita a partir da análise do conteúdo de cada um dos artigos,
-      o que demandará tempo e um trabalho coordenado. Por este motivo optou-se por iniciar este processo a partir de dados de
-      caráter mais fundamental, que podem ser obtidos a partir das páginas web das publicações e que servirão de base para os
-      demais cadastros.
+      O projeto Bibliometria Arqueológica pretende reunir um conjunto diverso de informações sobre artigos científicos de arqueologia publicados no Brasil.
+      Os dados do sistema estão organizados da seguinte forma:
     </p>
 
     <p>
-      Neste sentido, foi selecionada uma amostra inicial de artigos, delimitada por revistas de arqueologia que obtiveram nota Qualis igual ou superior a B2 na
-      <a class="underline" href="https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/avaliacao/avaliacao-quadrienal/avaliacao-quadrienal-2017-2020/metodologia-do-qualis-referencia-quadrienio-2017-2020">
-      avaliação quadrienal (2017-2020) da Capes</a>. Dentro deste recorte foram selecionadas todas as publicações disponíveis online. Nesta primeira etapa, o Boletim do Museu Paraense Emílio Goeldi precisou
-      ser excluído, devido às constantes instabilidades do site onde a revista está hospedada.
+      Revista Científica: Nome completo; Vínculo institucional; ISSN; Escopo temático; URL do site; Periodicidade; Status atual (ativo, descontinuado, etc);
+      Ano da fundação; Ano do encerramento; Qualis.
+    </p>
+      
+    <p>
+      Edição: Número da edição (volume, número); Data de publicação; Editores; Tema de edição; Tipo da edição (regular, especial, suplemento); URL de acesso;
+      DOI da edição; Formato disponível (impresso, digital, ambos)
+    <p>
+
+    <p>
+      Artigo: Título; Autor(es); Resumo; DOI; URL do artigo; Palavras chave; Idioma; Tema da pesquisa (Tupiguarani, Sambaqui, etc.); Tipo da publicação
+      (artigo original, revisão, resenha, etc); Metodologia principal (escavação, análise de laboratório, revisão bibliográfica, etc.); 
     </p>
 
+    <p>
+      Referência bibliográfica; instituição(ções) dos pesquisadores; fonte dos dados; citação a alguma base de dados; Estado(s) onde se passa à pesquisa;
+      Uso de SIG ou técnicas de análise espacial; Métodos laboratoriais (ex: C14, DNA, etc); Datações;
+    </p>
+
+    <p>
+      Palavra chave.
+    </p>
+
+    <p>
+      Autor: Nome; país de origem; Vínculo institucional; Área de especialização; Formação acadêmica.
+    </p>
+
+    <p>
+      Referência bibliográfica: Tipo (livro, artigo, tese, etc.); Autores; Ano; Título; Editora / periódico / instituição; Local da publicação; DOI; Idioma.
+    </p>
+
+    <p>
+      Autor de referência bibliográfica: Nome.
+    </p>
+
+    <p>
+      A produção destes dados, em grande parte, precisará ser feita a partir da análise do conteúdo de cada um dos artigos, o que demandará tempo e um trabalho
+      coordenado. Por este motivo optou-se por iniciar este processo a partir de dados de caráter mais fundamental, que podem ser obtidos a partir das páginas
+      web das publicações e que servirão de base para os demais cadastros. Os dados iniciais são os seguintes:
+    </p>
+
+    <p>
+      Revista: edições.
+    </p>
+
+    <p>
+      Edição: Url da edição; data da publicação; artigos:
+    </p>
+
+    <p>
+      Artigo: Url do artigo; título; autores; DOI; palavras chave; resumo.
+    </p>
+
+    <p>
+      Neste sentido, foi selecionada uma amostra inicial de artigos, delimitada pelas oito revistas de arqueologia que obtiveram nota Qualis igual ou superior a B2 na
+      <a class="underline" href="https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/avaliacao/avaliacao-quadrienal/avaliacao-quadrienal-2017-2020/metodologia-do-qualis-referencia-quadrienio-2017-2020">avaliação quadrienal (2017-2020) da Capes</a>.
+      Dentro deste recorte foram selecionadas todas as publicações disponíveis online. Nesta primeira etapa, o Boletim do Museu Paraense Emílio Goeldi precisou ser excluído,
+      devido às constantes instabilidades do site onde a revista está hospedada. As demais revistas são: as seguintes Cadernos do Leparq, Revista de Arqueologia Pública,
+      Revista Habitus, Revista Clio, Revista do Museu de Arqueologia e Etnologia da USP, Revista da Sociedade de Arqueologia Brasileira, Revista Vestígios
+    </p>
+      
     <p>
       Os dados foram produzidos de maneira automatizada, a partir da técnica de <a class="underline" href="https://pt.wikipedia.org/wiki/Web_scraping">web scraping</a>.
       Os scripts utilizados para gerar os dados estão disponíveis <a class="underline" href="https://github.com/FabricioBernardes/scraping_journals">neste repositório do GitHub</a>.
@@ -34,15 +82,13 @@
     </p>
 
     <p>
-      Essa primeira etapa já foi concluída, e os dados estão disponíveis no sistema. Atualmente, já se conta com os registros-base de 3.770 artigos,
-      formando uma amostra bem delimitada que servirá de base para o cadastro de informações mais detalhadas.
+      Essa primeira etapa já foi concluída, e os dados estão disponíveis no sistema. Atualmente já se conta com os registros-base de 3.770 artigos, formando uma
+      amostra bem delimitada que servirá de base para o cadastro de informações mais detalhadas.
     </p>
 
     <p>
-      Caso queira colaborar com o projeto, seja na produção dos dados ou no desenvolvimento do sistema,
-      entre em contato por e-mail: <a href="mailto:fbernardes.dev@gmail.com">fbernardes.dev@gmail.com</a>
+      Caso queira colaborar com o projeto, seja na produção dos dados ou no desenvolvimento do sistema, entre em contato por e-mail: fbernardes.dev@gmail.com
     </p>
-
 
     <p>
       O código-fonte do projeto pode ser acessado em <a class="underline" href="https://github.com/FabricioBernardes/br_archaeological_journals">neste repositório do GitHub</a>.

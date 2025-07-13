@@ -1,0 +1,59 @@
+<button id="menu-mobile-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-mobile-dropdown">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
+</button>
+
+<div id="menu-mobile-dropdown" class="absolute top-0 left-0 w-[100vw] h-[100vh] bg-stone-50 z-50 hidden">
+  <div class="flex items-center justify-between px-4 py-2 bg-stone-200">
+    <a href="/" class="px-2">
+      <h1 class="font-bold sm:text-2xl text-xl">Bibliometria Arqueológica</h1>
+    </a>
+
+    <button id="menu-mobile-close" aria-label="Fechar menu" class="p-2 pr-0 rounded hover:bg-stone-100 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="border-t border-stone-500 p-4 pt-6">
+    <a href="/" class="block py-2 px-2 text-stone-700 hover:bg-stone-100 border-b border-stone-500">Página inicial</a>
+    <a href="/scientific_journals" class="block py-2 px-2 text-stone-700 hover:bg-stone-100 border-b border-stone-500">Revistas cientificas</a>
+    <a href="<%= blog_path %>" class="block py-2 px-2 text-stone-700 hover:bg-stone-100 border-b border-stone-500">Blog</a>
+    <div class="flex flex-col gap-2 mt-2">
+      <% if user_signed_in? %>
+        <%= link_to 'Edit Profile', edit_user_registration_path, class: "block py-2 px-2 text-stone-700 hover:bg-stone-100 border-b border-stone-500" %>
+        <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "block py-2 px-2 text-stone-700 hover:bg-stone-100 border-b border-stone-500" %>
+      <% else %>
+        <%= link_to 'Login', new_user_session_path, class: "block py-2 px-2 text-stone-700 hover:bg-stone-100 border-b" %>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggle = document.getElementById('menu-mobile-toggle');
+    var menu = document.getElementById('menu-mobile-dropdown');
+    var closeBtn = document.getElementById('menu-mobile-close');
+    if (toggle && menu) {
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !expanded);
+        menu.classList.toggle('hidden');
+      });
+      document.addEventListener('click', function(e) {
+        if (!menu.classList.contains('hidden')) {
+          if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+            menu.classList.add('hidden');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
+      // Botão de fechar
+      closeBtn.addEventListener('click', function(e) {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>

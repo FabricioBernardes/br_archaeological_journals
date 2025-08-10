@@ -5,6 +5,7 @@ class Edition < ApplicationRecord
   validates :volume, presence: true
 
   def volume_with_journal
-    "#{scientific_journal.name} - Volume #{volume} (#{publication_date.year})"
+    year_part = publication_date.present? ? " (#{publication_date.year})" : ""
+    "#{scientific_journal.name} - Volume #{volume}#{year_part}"
   end
 end

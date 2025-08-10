@@ -177,7 +177,7 @@
   <% else %>
     <div class="field my-5">
       <%= form.label "Edição" %>
-      <%= form.collection_select :edition_id, Edition.all.order('volume'), :id, :volume_with_journal, {prompt: "Selecione a Edição"}, class: "form-control" %>
+      <%= form.collection_select :edition_id, Edition.includes(:scientific_journal).order('scientific_journals.name, editions.volume'), :id, :volume_with_journal, {prompt: "Selecione a Edição"}, class: "form-control" %>
     </div>
   <% end %>
 

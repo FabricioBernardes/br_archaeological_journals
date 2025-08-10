@@ -15,7 +15,7 @@
 
   <div id="scientific_journals" class="flex flex-col gap-4 w-full">
     <% if @scientific_journals.any? %>
-      <% @scientific_journals.each do |scientific_journal| %>
+      <% @scientific_journals.order(:name).each do |scientific_journal| %>
         <div class="w-full bg-white border border-stone-200 rounded-md shadow-sm hover:bg-stone-50 transition px-4 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div class="flex flex-col w-full">
             <%= link_to scientific_journal, class: "flex flex-col w-full group" do %>

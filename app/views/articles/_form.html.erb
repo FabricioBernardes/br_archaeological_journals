@@ -168,18 +168,15 @@
     <%= form.text_area :datings, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": article.errors[:datings].none?, "border-red-400 focus:outline-red-600": article.errors[:datings].any?}] %>
   </div>
 
-  <% if edition_id.present? %>
-    <div class="field my-5">
-      <%= form.label "Edição" %>
-      <%= form.hidden_field :edition_id, value: edition_id %>
+  <div class="field my-5">
+    <%= form.label "Edição" %>
+    <%= form.hidden_field :edition_id, value: edition_id %>
+    <% if edition_id.present? %>
       <%= Edition.find(edition_id).volume_with_journal %>
-    </div>
-  <% else %>
-    <div class="field my-5">
-      <%= form.label "Edição" %>
-      <%= form.collection_select :edition_id, Edition.includes(:scientific_journal).order('scientific_journals.name, editions.volume'), :id, :volume_with_journal, {prompt: "Selecione a Edição"}, class: "form-control" %>
-    </div>
-  <% end %>
+    <% else %>
+      <%= form.collection_select :edition_id, Edition.includes(:scientific_journal).order('scientific_journals.name, editions.volume'), :id, :volume_with_journal, {prompt: "Selecione a Edição"}, class: "form-control w-full" %>
+    <% end %>
+  </div>
 
   <div class="my-5">
     <%= form.label "Referências bibliográficas" %>

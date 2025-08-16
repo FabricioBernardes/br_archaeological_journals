@@ -1,0 +1,83 @@
+<%# This partial renders bibliographic references form section for an article %>
+<div class="my-5">
+  <%= form.label "Referências bibliográficas" %>
+  <div class="flex flex-col gap-2 mb-2" data-controller="bibliographic-references">
+    <div class="flex flex-wrap gap-2 mb-2">
+      <% article.bibliographic_references.each do |reference| %>
+        <span class="flex bg-stone-100 text-black px-2 py-2 rounded items-center w-full" data-bibliographic-references-target="referenceTag" data-bibliographic-references-index="<%= reference.id %>">
+          <ul class="list-disc ml-6">
+            <li>
+              <% if reference.author_refs.any? %>
+                <span>(
+                  <%= reference.author_refs.map(&:name).to_sentence(last_word_connector: ', ', two_words_connector: ', ') %>
+                )</span>
+              <% end %>
+              <strong><%= reference.title %>.</strong>
+              <%= reference.publication_location.presence ? reference.publication_location + ": " : "" %>
+              <%= reference.publisher.presence ? reference.publisher + ", " : "" %>
+              <%= reference.year.presence ? reference.year.to_s + "." : "" %>
+              <% if reference.doi.present? %>
+                DOI: <%= reference.doi %>.
+              <% end %>
+            </li>
+          </ul>
+          <button
+            type="button"
+            class="ml-2 text-red-500 hover:text-red-700 font-bold cursor-pointer self-end"
+            data-action="click->bibliographic-references#removeReference"
+            data-bibliographic-references-index="<%= reference.id %>"
+          >
+            &times;
+          </button>
+          <input type="hidden" name="article[bibliographic_reference_ids][]" value="<%= reference.id %>" />
+        </span>
+      <% end %>
+    </div>
+    <div>
+      <div>
+        <p>Buscar referência existente pelo título</p>
+        <input
+          type="text"
+          name="new_bibliographic_reference_search"
+          placeholder="Buscar..."
+          class="border rounded px-2 py-1 w-48 mt-2"
+          data-action="input->bibliographic-references#autocomplete keydown->bibliographic-references#handleKeydown"
+          data-bibliographic-references-target="input"
+          autocomplete="off"
+        />
+        <ul class="absolute bg-white border rounded shadow mt-1 z-10 w-96 hidden" data-bibliographic-references-target="suggestions"></ul>
+      </div>
+    </div>
+    <div class="border rounded p-3 bg-stone-50 mt-2">
+      <p class="mb-2">Cadastrar nova referência</p>
+      <div class="grid grid-cols-1 items-end md:grid-cols-2 gap-2">
+        <div>
+          <div class="flex flex-col gap-2" data-controller="authors" data-authors-context="bibliographic-reference">
+            <div class="flex flex-col gap-2 mb-2"></div>
+            <div class="flex items-center">
+              <input
+                type="text"
+                name="new_bibliographic_reference[author_refs_search]"
+                placeholder="Adicionar autor"
+                class="border rounded px-2 py-1 w-full h-10"
+                data-action="input->authors#autocomplete keydown->authors#handleKeydown"
+                data-authors-target="input"
+                autocomplete="off"
+              />
+              <ul class="absolute bg-white border rounded shadow mt-1 z-10 w-48 hidden" data-authors-target="suggestions"></ul>
+              <button type="button" class="ml-2 bg-blue-500 text-white px-2 py-1 h-10 rounded">Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <input type="text" name="new_bibliographic_reference[title]" placeholder="Título" class="border rounded px-2 py-1 w-full h-10" />
+        <input type="number" name="new_bibliographic_reference[year]" placeholder="Ano" class="border rounded px-2 py-1 w-full h-10" />
+        <input type="text" name="new_bibliographic_reference[publisher]" placeholder="Editora" class="border rounded px-2 py-1 w-full h-10" />
+        <input type="text" name="new_bibliographic_reference[publication_location]" placeholder="Local de publicação" class="border rounded px-2 py-1 w-full h-10" />
+        <input type="text" name="new_bibliographic_reference[doi]" placeholder="DOI" class="border rounded px-2 py-1 w-full h-10" />
+        <input type="text" name="new_bibliographic_reference[language]" placeholder="Idioma" class="border rounded px-2 py-1 w-full h-10" />
+        <input type="text" name="new_bibliographic_reference[reference_type]" placeholder="Tipo de referência" class="border rounded px-2 py-1 w-full h-10" />
+      </div>
+      <button type="button" class="mt-2 bg-green-600 text-white px-3 py-1 rounded" data-action="click->bibliographic-references#addNewReference">Cadastrar nova referência</button>
+    </div>
+  </div>
+</div>

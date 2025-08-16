@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :authors
-  resources :bibliographic_references
+  resources :bibliographic_references do
+    collection do
+      get :fetch_doi
+    end
+  end
   resources :articles
   resources :editions
   resources :scientific_journals

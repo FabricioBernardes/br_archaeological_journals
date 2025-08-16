@@ -48,8 +48,29 @@
         <ul class="absolute bg-white border rounded shadow mt-1 z-10 w-96 hidden" data-bibliographic-references-target="suggestions"></ul>
       </div>
     </div>
-    <div class="border rounded p-3 bg-stone-50 mt-2">
+    <div class="border rounded p-3 bg-stone-50 mt-2" data-controller="doi-lookup">
       <p class="mb-2">Cadastrar nova referência</p>
+      
+      <div class="mb-3 p-2 bg-blue-50 rounded-md">
+        <label class="block mb-1 font-medium">Buscar referência por DOI:</label>
+        <div class="flex items-center">
+          <input 
+            type="text" 
+            placeholder="Ex: 10.1016/j.jasrep.2017.11.036" 
+            class="border rounded px-2 py-1 w-full h-10" 
+            data-doi-lookup-target="doiInput"
+          />
+          <button 
+            type="button" 
+            class="ml-2 bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 h-10 rounded"
+            data-action="click->doi-lookup#fetchDoi"
+          >
+            Buscar DOI
+          </button>
+        </div>
+        <div data-doi-lookup-target="message" class="mt-1 text-sm hidden"></div>
+      </div>
+      
       <div class="grid grid-cols-1 items-end md:grid-cols-2 gap-2">
         <div>
           <div class="flex flex-col gap-2" data-controller="authors" data-authors-context="bibliographic-reference">
@@ -68,14 +89,15 @@
               <button type="button" class="ml-2 bg-blue-500 text-white px-2 py-1 h-10 rounded">Adicionar</button>
             </div>
           </div>
+          <div data-doi-lookup-target="authorsContainer" class="mt-2"></div>
         </div>
-        <input type="text" name="new_bibliographic_reference[title]" placeholder="Título" class="border rounded px-2 py-1 w-full h-10" />
-        <input type="number" name="new_bibliographic_reference[year]" placeholder="Ano" class="border rounded px-2 py-1 w-full h-10" />
-        <input type="text" name="new_bibliographic_reference[publisher]" placeholder="Editora" class="border rounded px-2 py-1 w-full h-10" />
-        <input type="text" name="new_bibliographic_reference[publication_location]" placeholder="Local de publicação" class="border rounded px-2 py-1 w-full h-10" />
-        <input type="text" name="new_bibliographic_reference[doi]" placeholder="DOI" class="border rounded px-2 py-1 w-full h-10" />
-        <input type="text" name="new_bibliographic_reference[language]" placeholder="Idioma" class="border rounded px-2 py-1 w-full h-10" />
-        <input type="text" name="new_bibliographic_reference[reference_type]" placeholder="Tipo de referência" class="border rounded px-2 py-1 w-full h-10" />
+        <input type="text" name="new_bibliographic_reference[title]" placeholder="Título" class="border rounded px-2 py-1 w-full h-10" data-doi-lookup-target="title" />
+        <input type="number" name="new_bibliographic_reference[year]" placeholder="Ano" class="border rounded px-2 py-1 w-full h-10" data-doi-lookup-target="year" />
+        <input type="text" name="new_bibliographic_reference[publisher]" placeholder="Editora" class="border rounded px-2 py-1 w-full h-10" data-doi-lookup-target="publisher" />
+        <input type="text" name="new_bibliographic_reference[publication_location]" placeholder="Local de publicação" class="border rounded px-2 py-1 w-full h-10" data-doi-lookup-target="publicationLocation" />
+        <input type="text" name="new_bibliographic_reference[doi]" placeholder="DOI" class="border rounded px-2 py-1 w-full h-10" data-doi-lookup-target="doiField" />
+        <input type="text" name="new_bibliographic_reference[language]" placeholder="Idioma" class="border rounded px-2 py-1 w-full h-10" data-doi-lookup-target="language" />
+        <input type="text" name="new_bibliographic_reference[reference_type]" placeholder="Tipo de referência" class="border rounded px-2 py-1 w-full h-10" data-doi-lookup-target="referenceType" />
       </div>
       <button type="button" class="mt-2 bg-green-600 text-white px-3 py-1 rounded" data-action="click->bibliographic-references#addNewReference">Cadastrar nova referência</button>
     </div>

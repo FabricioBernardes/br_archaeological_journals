@@ -1,4 +1,4 @@
-<%= form_with(model: bibliographic_reference, class: "contents") do |form| %>
+<%= form_with(model: bibliographic_reference, class: "contents", data: { controller: "doi-lookup" }) do |form| %>
   <% if bibliographic_reference.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
       <h2><%= pluralize(bibliographic_reference.errors.count, "error") %> prohibited this bibliographic_reference from being saved:</h2>
@@ -13,37 +13,51 @@
 
   <div class="my-5">
     <%= form.label :reference_type %>
-    <%= form.text_field :reference_type, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:reference_type].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:reference_type].any?}] %>
+    <%= form.text_field :reference_type, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:reference_type].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:reference_type].any?}], data: { doi_lookup_target: "referenceType" } %>
   </div>
 
   <div class="my-5">
     <%= form.label :year %>
-    <%= form.number_field :year, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:year].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:year].any?}] %>
+    <%= form.number_field :year, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:year].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:year].any?}], data: { doi_lookup_target: "year" } %>
   </div>
 
   <div class="my-5">
     <%= form.label :title %>
-    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:title].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:title].any?}] %>
+    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:title].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:title].any?}], data: { doi_lookup_target: "title" } %>
   </div>
 
   <div class="my-5">
     <%= form.label :publisher %>
-    <%= form.text_field :publisher, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:publisher].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:publisher].any?}] %>
+    <%= form.text_field :publisher, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:publisher].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:publisher].any?}], data: { doi_lookup_target: "publisher" } %>
   </div>
 
   <div class="my-5">
     <%= form.label :publication_location %>
-    <%= form.text_field :publication_location, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:publication_location].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:publication_location].any?}] %>
+    <%= form.text_field :publication_location, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:publication_location].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:publication_location].any?}], data: { doi_lookup_target: "publicationLocation" } %>
   </div>
 
   <div class="my-5">
     <%= form.label :doi %>
-    <%= form.text_field :doi, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:doi].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:doi].any?}] %>
+    <div class="flex">
+      <%= form.text_field :doi, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:doi].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:doi].any?}], data: { doi_lookup_target: "doiInput", doi_lookup_target: "doiField" } %>
+      <button type="button" class="ml-2 mt-2 bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-md" data-action="click->doi-lookup#fetchDoi">
+        Buscar DOI
+      </button>
+    </div>
+    <div class="text-sm text-gray-500 mt-1">
+      Digite um DOI (ex: 10.1000/xyz123) e clique em "Buscar DOI" para preencher automaticamente os campos
+    </div>
+    <div data-doi-lookup-target="message" class="mt-1 text-sm hidden"></div>
   </div>
 
   <div class="my-5">
     <%= form.label :language %>
-    <%= form.text_field :language, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:language].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:language].any?}] %>
+    <%= form.text_field :language, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-stone-400 focus:outline-blue-600": bibliographic_reference.errors[:language].none?, "border-red-400 focus:outline-red-600": bibliographic_reference.errors[:language].any?}], data: { doi_lookup_target: "language" } %>
+  </div>
+  
+  <div class="my-5">
+    <label for="author_refs">Autores</label>
+    <div data-doi-lookup-target="authorsContainer" class="mt-2"></div>
   </div>
 
   <div class="inline">

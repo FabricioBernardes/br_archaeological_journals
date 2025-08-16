@@ -162,7 +162,7 @@ export default class extends Controller {
     const newRef = {};
     fields.forEach(input => {
       const key = input.name.match(/new_bibliographic_reference\[(.*)\]/)[1];
-      if (key !== 'author_refs_search') {
+      if (key !== 'author_refs_search' && !key.startsWith('author_names')) {
         newRef[key] = input.value.trim();
       }
     });
@@ -170,6 +170,12 @@ export default class extends Controller {
     const authorIds = Array.from(formWrapper.querySelectorAll('input[name="new_bibliographic_reference[author_ref_ids][]"]')).map(i => i.value);
     if (authorIds.length > 0) {
       newRef.author_ref_ids = authorIds;
+    }
+    
+    // Coleta os nomes dos autores vindos da busca por DOI
+    const authorNames = Array.from(formWrapper.querySelectorAll('input[name="new_bibliographic_reference[author_names][]"]')).map(i => i.value);
+    if (authorNames.length > 0) {
+      newRef.author_names = authorNames;
     }
     // Validação simples
     if (!newRef.title) {

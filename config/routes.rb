@@ -5,7 +5,12 @@ Rails.application.routes.draw do
       get :fetch_doi
     end
   end
-  resources :articles
+  resources :articles do
+    member do
+      post :add_reference
+      delete :remove_reference
+    end
+  end
   resources :editions
   resources :scientific_journals
   resources :keywords, defaults: { format: :json }

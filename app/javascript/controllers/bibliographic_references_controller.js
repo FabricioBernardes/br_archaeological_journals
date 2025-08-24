@@ -133,33 +133,105 @@ export default class extends Controller {
       alert("Esta referência já foi adicionada ao artigo.");
       return;
     }
+    
+    // Obtém o ID do artigo da URL
+    const articleId = this.getArticleIdFromUrl();
+    if (!articleId) {
+      console.error("Não foi possível obter o ID do artigo");
+      return;
+    }
+    
+    // Salva a referência no artigo via API
+    fetch(`/articles/${articleId}/add_reference`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ reference_id: ref.id })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Cria o elemento da referência
+        const refTag = document.createElement('span');
+        refTag.className = 'flex bg-stone-100 text-black px-2 py-2 rounded items-center w-full';
+        refTag.setAttribute('data-bibliographic-references-target', 'referenceTag');
+        refTag.setAttribute('data-bibliographic-references-index', ref.id);
+        refTag.innerHTML = `
+          <ul class="list-disc ml-6">
+            <li>
+              ${ref.author_refs && ref.author_refs.length ? 
+              `<span>(${ref.author_refs.join(', ')})</span>` : ''}
+              <strong>${ref.title}.</strong>
+              ${ref.publication_location ? ref.publication_location + ': ' : ''}
+              ${ref.publisher ? ref.publisher + ', ' : ''}
+              ${ref.year ? ref.year + '.' : ''}
+              ${ref.doi ? 'DOI: ' + ref.doi + '.' : ''}
+            </li>
+          </ul>
+          <button
+            type="button"
+            class="ml-2 text-red-500 hover:text-red-700 font-bold cursor-pointer self-end"
+            data-action="click->bibliographic-references#removeReference"
+            data-bibliographic-references-index="${ref.id}"
+          >
+            &times;
+          </button>
+          <input type="hidden" name="article[bibliographic_reference_ids][]" value="${ref.id}" />
+        `;
 
-    // Cria o elemento da referência
-    const refTag = document.createElement('span');
-    refTag.className = 'flex bg-stone-100 text-black px-2 py-2 rounded items-center w-full';
-    refTag.setAttribute('data-bibliographic-references-target', 'referenceTag');
-    refTag.setAttribute('data-bibliographic-references-index', ref.id);
-    refTag.innerHTML = `
-      ${ref.title} (${ref.year || "Sem ano"}) 
-      <button
-        type="button"
-        class="ml-2 text-red-500 hover:text-red-700 font-bold cursor-pointer self-end"
-        data-action="click->bibliographic-references#removeReference"
-        data-bibliographic-references-index="${ref.id}"
-      >
-        &times;
-      </button>
-      <input type="hidden" name="article[bibliographic_reference_ids][]" value="${ref.id}" />
-    `;
-
-    // Adiciona ao container
-    container.appendChild(refTag);
+        // Adiciona ao container
+        container.appendChild(refTag);
+      } else {
+        alert("Erro ao adicionar referência ao artigo.");
+      }
+    })
+    .catch(error => {
+      console.error("Erro ao adicionar referência:", error);
+      alert("Erro ao adicionar referência ao artigo.");
+    });
   }
 
   removeReference(event) {
     const btn = event.target;
     const tag = btn.closest("span");
-    if (tag) tag.remove();
+    if (!tag) return;
+    
+    const referenceId = btn.getAttribute('data-bibliographic-references-index');
+    if (!referenceId) return;
+    
+    // Obtém o ID do artigo da URL
+    const articleId = this.getArticleIdFromUrl();
+    if (!articleId) {
+      console.error("Não foi possível obter o ID do artigo");
+      return;
+    }
+    
+    // Remove a referência do artigo via API
+    fetch(`/articles/${articleId}/remove_reference`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ reference_id: referenceId })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Remove o elemento da referência da interface
+        tag.remove();
+      } else {
+        alert("Erro ao remover referência do artigo.");
+      }
+    })
+    .catch(error => {
+      console.error("Erro ao remover referência:", error);
+      alert("Erro ao remover referência do artigo.");
+    });
   }
 
   // Adiciona uma nova referência a partir dos campos do formulário
@@ -323,5 +395,16 @@ export default class extends Controller {
       });
       alert(errorMessage);
     }
+  }
+  
+  // Método para obter o ID do artigo a partir da URL
+  getArticleIdFromUrl() {
+    // Verifica se estamos em uma página de artigo
+    const urlPath = window.location.pathname;
+    const match = urlPath.match(/\/articles\/(\d+)(\/edit)?/);
+    if (match && match[1]) {
+      return match[1];
+    }
+    return null;
   }
 }

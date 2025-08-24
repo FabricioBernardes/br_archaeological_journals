@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[show edit update destroy]
+  before_action :set_article, only: %i[show edit update destroy add_reference remove_reference]
   before_action :authenticate_user!, except: %i[index show]
-  before_action :require_contributor_or_admin, only: %i[new create edit update destroy]
+  before_action :require_contributor_or_admin, only: %i[new create edit update destroy add_reference remove_reference]
 
   # GET /articles or /articles.json
   def index
@@ -62,6 +62,36 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to articles_path, status: :see_other, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+  
+  # POST /articles/1/add_reference
+  def add_reference
+    reference_id = params[:reference_id]
+    
+    # Verifica se a referência já existe no artigo
+    unless @article.bibliographic_reference_ids.include?(reference_id.to_i)
+      # Adiciona a referência diretamente na associação
+      @article.bibliographic_references << BibliographicReference.find(reference_id.to_i)
+    end
+    
+    respond_to do |format|
+      format.json { render json: { success: true, message: "Referência adicionada com sucesso" } }
+    end
+  end
+  
+  # DELETE /articles/1/remove_reference
+  def remove_reference
+    reference_id = params[:reference_id]
+    
+    # Remove a referência do artigo usando o objeto
+    reference = BibliographicReference.find_by(id: reference_id)
+    if reference
+      @article.bibliographic_references.delete(reference)
+    end
+    
+    respond_to do |format|
+      format.json { render json: { success: true, message: "Referência removida com sucesso" } }
     end
   end
 

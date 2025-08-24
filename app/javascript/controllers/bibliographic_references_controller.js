@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["referenceTag", "input", "suggestions", "errorMessages"];
+  static targets = ["referenceTag", "input", "suggestions", "errorMessages", "submitButton", "buttonText", "loadingSpinner"];
 
   connect() {
     this.selectedSuggestionIndex = -1;
@@ -238,6 +238,14 @@ export default class extends Controller {
   addNewReference(event) {
     event.preventDefault();
     
+    // Mostra o indicador de loading
+    if (this.hasSubmitButtonTarget && this.hasButtonTextTarget && this.hasLoadingSpinnerTarget) {
+      this.submitButtonTarget.disabled = true;
+      this.submitButtonTarget.classList.add('opacity-75');
+      this.buttonTextTarget.textContent = "Salvando...";
+      this.loadingSpinnerTarget.classList.remove('hidden');
+    }
+    
     // Limpa mensagens de erro anteriores
     if (this.hasErrorMessagesTarget) {
       this.errorMessagesTarget.classList.add('hidden');
@@ -338,6 +346,15 @@ export default class extends Controller {
         if (error !== 'Referência duplicada') {
           alert('Erro ao cadastrar referência.');
           console.error(error);
+        }
+      })
+      .finally(() => {
+        // Restaura o estado original do botão após a operação (sucesso ou falha)
+        if (this.hasSubmitButtonTarget && this.hasButtonTextTarget && this.hasLoadingSpinnerTarget) {
+          this.submitButtonTarget.disabled = false;
+          this.submitButtonTarget.classList.remove('opacity-75');
+          this.buttonTextTarget.textContent = "Cadastrar nova referência";
+          this.loadingSpinnerTarget.classList.add('hidden');
         }
       });
   }

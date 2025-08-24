@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-
   # Blog static pages
   get 'blog', to: 'blog#index', as: :blog
   get 'blog/:id', to: 'blog#show', as: :blog_post

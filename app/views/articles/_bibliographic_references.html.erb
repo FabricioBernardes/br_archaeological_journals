@@ -1,13 +1,11 @@
 <%# This partial renders bibliographic references for an article %>
 <div>
   <strong class="block font-medium mb-1">Referências bibliográficas:</strong>
-  <ul class="list-disc ml-6">
+  <ul>
     <% bibliographic_references.each do |reference| %>
       <li class="mb-2">
         <% if reference.author_refs.any? %>
-          <span>(
-            <%= reference.author_refs.map(&:name).to_sentence(last_word_connector: ', ', two_words_connector: ', ') %>
-          )</span>
+          <span><%= reference.author_refs.map(&:name).to_sentence(last_word_connector: ', ', two_words_connector: ', ') %></span>
         <% end %>
         <strong><%= reference.title %>.</strong>
         <%= reference.publication_location.presence ? reference.publication_location + ": " : "" %>

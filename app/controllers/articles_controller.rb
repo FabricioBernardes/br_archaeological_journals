@@ -64,32 +64,30 @@ class ArticlesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   # POST /articles/1/add_reference
   def add_reference
     reference_id = params[:reference_id]
-    
+
     # Verifica se a referência já existe no artigo
     unless @article.bibliographic_reference_ids.include?(reference_id.to_i)
       # Adiciona a referência diretamente na associação
       @article.bibliographic_references << BibliographicReference.find(reference_id.to_i)
     end
-    
+
     respond_to do |format|
       format.json { render json: { success: true, message: "Referência adicionada com sucesso" } }
     end
   end
-  
+
   # DELETE /articles/1/remove_reference
   def remove_reference
     reference_id = params[:reference_id]
-    
+
     # Remove a referência do artigo usando o objeto
     reference = BibliographicReference.find_by(id: reference_id)
-    if reference
-      @article.bibliographic_references.delete(reference)
-    end
-    
+    @article.bibliographic_references.delete(reference) if reference
+
     respond_to do |format|
       format.json { render json: { success: true, message: "Referência removida com sucesso" } }
     end

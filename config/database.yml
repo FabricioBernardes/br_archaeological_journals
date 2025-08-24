@@ -18,24 +18,19 @@ default: &default
   username: <%= ENV.fetch("PGUSER", "") %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-# development:
-#   <<: *default
-#   database: <%= ENV.fetch("PGDATABASE", "") %>
-
-# test:
-#   <<: *default
-#   database: <%= ENV.fetch("PGDATABASE", "") %>
-
 development:
   <<: *default
-  database: br_archaeological_journals_development
+  database: <%= ENV.fetch("PGDATABASE", "") %>
 
 test:
   <<: *default
-  database: br_archaeological_journals_test
+  database: <%= ENV.fetch("PGDATABASE", "") %>
 
 production:
   <<: *default
-  database: br_archaeological_journals_production
-  username: br_archaeological_journals
-  password: <%= ENV["BR_ARCHAEOLOGICAL_JOURNALS_DATABASE_PASSWORD"] %>
+  database: <%= ENV.fetch("PGDATABASE", "") %>
+  username: <%= ENV.fetch("PGUSER", "") %>
+  password: <%= ENV.fetch("PGPASSWORD", "") %>
+  host: <%= ENV.fetch("PGHOST", "") %>
+  sslmode: require
+  channel_binding: require

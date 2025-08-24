@@ -16,4 +16,6 @@
 class BibliographicReference < ApplicationRecord
   has_and_belongs_to_many :articles
   has_and_belongs_to_many :author_refs
+
+  validates :title, presence: true, uniqueness: { case_sensitive: false, message: "já existe uma referência bibliográfica com esse título" }
 end

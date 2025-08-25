@@ -5,12 +5,12 @@ class EditionsController < ApplicationController
 
   # GET /editions or /editions.json
   def index
-    @editions = Edition.all
+    @editions = Edition.includes(:scientific_journal, articles: :authors).all
   end
 
   # GET /editions/1 or /editions/1.json
   def show
-    @articles = @edition.articles
+    @articles = @edition.articles.includes(:authors)
   end
 
   # GET /editions/new

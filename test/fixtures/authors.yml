@@ -1,4 +1,16 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: authors
+#
+#  id                        :bigint           not null, primary key
+#  name                      :string
+#  country_of_origin         :string
+#  institutional_affiliation :string
+#  specialization_area       :string
+#  academic_background       :text
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#
 
 one:
   name: MyString

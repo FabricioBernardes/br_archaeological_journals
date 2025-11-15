@@ -4,7 +4,7 @@
 #
 
 app = 'br-archaeological-journals'
-primary_region = 'gig'
+primary_region = 'gru'
 console_command = '/rails/bin/rails console'
 
 [build]
